@@ -111,13 +111,13 @@ main = ->
     bird.body.velocity.y = 100 if bird.body.velocity.y > 0
     bird.animations.stop()
     bird.frame = 1
-    instText.setText "TOUCH\nTO TRY AGAIN"
+    instText.setText "TOQUE\nPARA TENTAR NOVAMENTE"
     instText.renderable = true
     hiscore = window.localStorage.getItem("hiscore")
     hiscore = (if hiscore then hiscore else score)
     hiscore = (if score > parseInt(hiscore, 10) then score else hiscore)
     window.localStorage.setItem "hiscore", hiscore
-    gameOverText.setText "GAMEOVER\n\nHIGH SCORE\n\n" + hiscore
+    gameOverText.setText "GAME OVER\n\nRECORDE\n\n" + hiscore
     gameOverText.renderable = true
 
     # Stop all tubes
@@ -296,7 +296,7 @@ main = ->
     # credits.renderable = true
     # credits.setText "see console log\nfor github url"
     scoreText.setText "FLAPPY PIX"
-    instText.setText "TOQUE PARA VOAR\nASAS DO PÁSSARO"
+    instText.setText "TOQUE\nPARA VOAR"
     gameOverText.renderable = false
     bird.body.allowGravity = false
     bird.reset game.world.width * 0.3, game.world.height / 2
