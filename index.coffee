@@ -295,8 +295,8 @@ main = ->
     score = 0
     # credits.renderable = true
     # credits.setText "see console log\nfor github url"
-    scoreText.setText "Flappy Bird"
-    instText.setText "TOUCH TO FLAP\nbird WINGS"
+    scoreText.setText "FLAPPY PIX"
+    instText.setText "TOQUE PARA VOAR\nASAS DO PÁSSARO"
     gameOverText.renderable = false
     bird.body.allowGravity = false
     bird.reset game.world.width * 0.3, game.world.height / 2
