@@ -740,126 +740,160 @@
       box-sizing: border-box;
     }
 
+    /* --- REBRANDED MODAL (HYBRID LEGIBILITY) --- */
     .glass-card {
       position: relative;
       width: 100%;
       max-width: 360px;
-      border-radius: 20px;
-      background: #18181b;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 32px 24px;
+      border-radius: 12px;
+      background: #201b24;
+      /* Slightly lighter purple/charcoal for less eye strain */
+      border: 4px solid #000;
+      padding: 24px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
       color: #fff;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-      animation: modalPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.5);
     }
 
     .pix-seal {
       display: flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 6px 12px;
-      border-radius: 100px;
+      gap: 8px;
+      background: #000;
+      padding: 8px 16px;
+      border-radius: 6px;
       margin-bottom: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 2px solid #FFD700;
     }
 
     .pix-seal-icon {
-      width: 14px;
-      height: 14px;
-      fill: rgba(255, 255, 255, 0.6);
+      width: 12px;
+      height: 12px;
+      fill: #FFD700;
     }
 
     .pix-seal-text {
-      font-size: 10px;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.6);
+      font-size: 11px;
+      font-weight: 700;
+      color: #FFD700;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
+      font-family: 'Roboto', sans-serif;
+      /* Readable font */
+      letter-spacing: 0.5px;
     }
 
     .glass-logo-small {
-      width: 48px;
-      height: 48px;
-      background: rgba(255, 255, 255, 0.05);
+      width: 56px;
+      height: 56px;
+      background: #fff;
+      border: 2px solid #000;
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 12px;
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
     }
 
     .glass-logo-small img {
-      width: 60%;
-      height: 60%;
+      width: 70%;
+      height: 70%;
       object-fit: contain;
     }
 
     .glass-title {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 4px;
-      color: #fff;
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      color: #F48C2C;
+      /* Logo Orange */
+      font-family: 'Press Start 2P', cursive;
+      /* Keep title retro */
+      text-shadow: 2px 2px 0 #000;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.4;
+      letter-spacing: -0.5px;
     }
 
     .balance-hero {
       text-align: center;
       margin-bottom: 24px;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      width: 100%;
     }
 
     .balance-label {
       font-size: 11px;
-      color: #71717a;
+      color: #ccc;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 4px;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 700;
     }
 
     .balance-amount {
       font-size: 32px;
-      font-weight: 800;
-      color: #fff;
+      /* Smaller font for pixel text fit */
+      font-weight: 900;
+      color: #00E676;
+      /* Money Green */
+      font-family: 'Roboto', sans-serif;
+      /* Monetary values readable */
+      text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
     }
 
     .key-selector {
       display: flex;
-      gap: 8px;
+      gap: 10px;
       width: 100%;
       margin-bottom: 20px;
     }
 
     .key-option {
       flex: 1;
-      background: #27272a;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      padding: 10px;
+      background: #2a2a2e;
+      border: 2px solid #444;
+      border-radius: 8px;
+      padding: 12px 6px;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 6px;
       cursor: pointer;
-      transition: all 0.2s;
-      color: #71717a;
+      transition: all 0.1s;
+      color: #bbb;
     }
 
     .key-option svg {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
     }
 
     .key-option span {
-      font-size: 10px;
-      font-weight: 600;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: 'Roboto', sans-serif;
     }
 
     .key-option.active {
-      background: #3f3f46;
-      border-color: rgba(255, 255, 255, 0.2);
-      color: #fff;
+      background: #F48C2C;
+      border-color: #F48C2C;
+      color: #000;
+      /* Contrast black text on orange */
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .key-option.active svg {
+      stroke: #000;
+      /* Dark icon on orange bg */
     }
 
     .glass-form {
@@ -869,62 +903,89 @@
     .glass-input-wrapper {
       position: relative;
       width: 100%;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .glass-input {
       width: 100%;
-      background: #09090b;
-      border: 1px solid #27272a;
-      border-radius: 12px;
+      background: #eee;
+      /* Light input for readability */
+      border: 3px solid #000;
+      border-radius: 8px;
       padding: 14px;
-      color: #fff;
-      font-size: 15px;
+      color: #000;
+      /* Balck text on light input */
+      font-size: 16px;
+      font-weight: 700;
       outline: none;
       transition: border-color 0.2s;
       box-sizing: border-box;
       text-align: center;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .glass-input::placeholder {
+      color: #666;
+      font-weight: 500;
     }
 
     .glass-input:focus {
-      border-color: #52525b;
+      border-color: #F48C2C;
     }
 
     .primary-withdraw-btn {
       width: 100%;
-      background: #fff;
-      color: #000;
-      border: none;
+      background: linear-gradient(to bottom, #55bf04 0%, #449903 100%);
+      color: #fff;
+      border: 3px solid #000;
       padding: 16px;
-      border-radius: 12px;
-      font-size: 15px;
+      border-radius: 8px;
+      font-size: 10px;
+      /* Reduced to fit text */
       font-weight: 700;
       cursor: pointer;
-      transition: opacity 0.2s;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
+      font-family: 'Press Start 2P', cursive;
+      text-transform: uppercase;
+      box-shadow: 0 4px 0 #2d6b00;
+      text-shadow: 1px 1px 0 #000;
+      letter-spacing: 0.5px;
+      line-height: 1.5;
+      /* Prevent overlap if it wraps */
+      text-align: center;
+    }
+
+    .primary-withdraw-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 0 0 #2d6b00;
     }
 
     .primary-withdraw-btn:hover {
-      opacity: 0.9;
+      opacity: 1;
+      /* Override old opacity hover */
+      filter: brightness(1.1);
     }
 
     .modal-footer {
-      margin-top: 24px;
+      margin-top: 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
-      color: #71717a;
+      gap: 6px;
+      color: #888;
+      font-family: 'Roboto', sans-serif;
       font-size: 11px;
+      opacity: 1;
     }
 
     .secure-line {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
+      font-size: 8px;
     }
 
     /* Social Proof in Modal */
@@ -934,14 +995,15 @@
     }
 
     .social-proof-modal p {
-      color: #a1a1aa;
-      font-size: 13px;
+      color: #ccc;
+      font-size: 12px;
       margin-bottom: 12px;
       margin-top: 0;
+      font-family: 'Roboto', sans-serif;
     }
 
     .social-proof-modal p strong {
-      color: #fff;
+      color: #00E676;
     }
 
     .avatars-row {
@@ -953,12 +1015,12 @@
     }
 
     .avatars-row img {
-      width: 36px;
-      height: 36px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
-      border: 3px solid #18181b;
+      border: 2px solid #000;
       /* Matches .glass-card background */
-      margin-left: -12px;
+      margin-left: -10px;
       object-fit: cover;
       position: relative;
       z-index: 1;
