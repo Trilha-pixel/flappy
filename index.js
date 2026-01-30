@@ -589,6 +589,9 @@ main = function() {
         gain = (taxaPorSegundo * multiplicador) * dt;
         saldoAcumulado += gain;
         sessionEarnings += gain;
+        if (Math.random() < 0.01) {
+          console.log("DEBUG: taxa=" + taxaPorSegundo + ", multi=" + multiplicador + ", dt=" + dt + ", gain=" + gain + ", saldo=" + saldoAcumulado);
+        }
         if (multiplicador >= 2.0) {
           if (saldoText) {
             saldoText.fill = "#FFD700";

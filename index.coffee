@@ -702,6 +702,9 @@ main = ->
         saldoAcumulado += gain
         sessionEarnings += gain
         
+        if Math.random() < 0.01 # Log roughly once per second
+          console.log "DEBUG: taxa=#{taxaPorSegundo}, multi=#{multiplicador}, dt=#{dt}, gain=#{gain}, saldo=#{saldoAcumulado}"
+        
         # Visual Frenzy State (2x+)
         if multiplicador >= 2.0
           if saldoText
