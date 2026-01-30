@@ -114,13 +114,28 @@
         diretamente no seu saldo!</p>
       <div class="limit-badge">⚠️ APENAS 3 TENTATIVAS restantes</div>
       <p>Você tem talento para faturar alto hoje?</p>
-      <button class="banner-btn" id="start-game-btn">COMEÇAR AGORA!</button>
+      <button class="banner-btn" id="start-game-btn" onclick="fecharBanner()">COMEÇAR AGORA!</button>
     </div>
   </div>
+  <script>
+    window.fecharBanner = function () {
+      const banner = document.getElementById('banner-overlay');
+      if (banner) {
+        banner.style.display = 'none';
+        console.log('✅ Banner fechado pelo usuário');
+        // Sincronizar com o jogo se ele já carregou
+        if (window.gameInstance && typeof window.gameInstance.clickBanner === 'function') {
+          window.gameInstance.clickBanner();
+        } else {
+          window.bannerClicadoAntes = true;
+        }
+      }
+    };
+  </script>
   <div id="loading">Carregando Flappy Pix...</div>
   <div id="screen"></div>
   <div id="github"></div>
-  <script src="index.min.js?v=flappypix2029"></script>
+  <script src="index.min.js?v=flappypix_v4"></script>
   <script>
     // Flappy Pix - Sistema Mobile-First (sem botão de saque)
     console.log('🎮 FLAPPY PIX - Sistema mobile ativo!');

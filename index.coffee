@@ -233,10 +233,16 @@ main = ->
     carregarSaldo()
     
     # Gerenciar Banner
-    document.querySelector('#start-game-btn').addEventListener 'click', ->
-      document.querySelector('#banner-overlay').style.display = 'none'
+    window.gameInstance = 
+      clickBanner: ->
+        bannerVisivel = false
+        console.log '🎮 Jogo: Banner marcado como invisível'
+        return
+
+    # Verificar se foi clicado antes de carregar
+    if window.bannerClicadoAntes
       bannerVisivel = false
-      return
+      document.querySelector('#banner-overlay').style.display = 'none'
 
     # Set world dimensions
     Phaser.Canvas.setSmoothingEnabled(game.context, false)
