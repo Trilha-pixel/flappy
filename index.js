@@ -343,20 +343,55 @@ main = function () {
     game.time.events.remove(tubesTimer);
     game.time.events.add(1000, function () {
       return game.input.onTap.addOnce(function () {
-        var amountEl, modal;
+        var triggerVictory = function () {
+          // 0. Clean up Phaser Text
+          if (gameOverText) gameOverText.renderable = false;
+          if (instText) instText.renderable = false;
+          if (scoreText) scoreText.renderable = false;
+
+          // 1. Play Victory Sound (using score sound for joy)
+          scoreSnd.play();
+
+          // 2. Confetti Effect
+          for (var i = 0; i < 50; i++) {
+            var confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.animationDuration = (Math.random() * 2 + 1) + 's';
+            confetti.style.backgroundColor = ['#FFD700', '#FF0000', '#00FF00', '#0000FF'][Math.floor(Math.random() * 4)];
+            document.body.appendChild(confetti);
+            setTimeout(function (el) { return function () { if (el.parentNode) el.parentNode.removeChild(el); }; }(confetti), 3000);
+          }
+
+          // 3. Show Victory Overlay
+          var overlay = document.getElementById('victory-overlay');
+          var vAmount = document.getElementById('victory-amount-display');
+          if (overlay && vAmount) {
+            vAmount.innerText = "R$ " + saldoAcumulado.toFixed(2).replace('.', ',');
+            overlay.classList.add('active');
+          }
+
+          // 4. Transition to Withdrawal Modal after 2.5s
+          setTimeout(function () {
+            if (overlay) overlay.classList.remove('active');
+
+            var modal = document.getElementById('withdrawal-modal');
+            if (modal) {
+              var amountEl = document.getElementById('modal-balance-display');
+              if (amountEl) {
+                amountEl.innerText = "R$ " + saldoAcumulado.toFixed(2).replace('.', ',');
+              }
+              modal.classList.add('visible'); // Use class for animation
+              console.log('💰 Modal de Saque (Mock) Exibido com Animação!');
+            }
+          }, 2500);
+        };
+
         if (tentativasRestantes > 0) {
           reset();
           return swooshSnd.play();
         } else {
-          modal = document.getElementById('withdrawal-modal');
-          if (modal) {
-            amountEl = document.getElementById('modal-balance-display');
-            if (amountEl) {
-              amountEl.innerText = "R$ " + saldoAcumulado.toFixed(2).replace('.', ',');
-            }
-            modal.style.display = 'flex';
-            console.log('💰 Modal de Saque (Mock) Exibido!');
-          }
+          triggerVictory();
           return game.input.onTap.removeAll();
         }
       });
