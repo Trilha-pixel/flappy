@@ -3,7 +3,7 @@ SPEED = 160
 GRAVITY = 1100
 FLAP = 320
 SPAWN_RATE = 1 / 1200
-OPENING = 100
+OPENING = 120
 SCALE = 1
 
 # Flappy Pix - Sistema de Monetização
