@@ -36,6 +36,7 @@ multiText = null;
 tentativasRestantes = 5;
 
 bannerVisivel = true;
+var inputLocked = false;
 
 firstPlay = true;
 
@@ -489,9 +490,21 @@ main = function () {
     document.querySelector('#loading').style.display = 'none';
     window.gameInstance = {
       clickBanner: function () {
+        var banner = document.getElementById('banner-overlay');
+        if (banner) {
+          banner.style.opacity = '0';
+          setTimeout(function () { banner.style.display = 'none'; }, 500);
+        }
+
         bannerVisivel = false;
-        document.getElementById('banner-overlay').style.display = 'none';
-        console.log('🎮 Jogo: Banner marcado como invisível');
+        console.log('🎮 Jogo: Banner fechado. Aguardando input...');
+
+        // Lock input briefly to prevent "double tap" effect
+        inputLocked = true;
+        setTimeout(function () { inputLocked = false; }, 500);
+
+        // Ensure game is in 'Get Ready' state
+        if (typeof reset === 'function') reset();
       }
     };
     if (window.bannerClicadoAntes) {
@@ -578,7 +591,7 @@ main = function () {
     swooshSnd = game.add.audio("swoosh");
     introSnd = game.add.audio("intro");
     game.input.onDown.add(function () {
-      if (!bannerVisivel) {
+      if (!bannerVisivel && !inputLocked) {
         flap();
       }
     });
