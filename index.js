@@ -479,8 +479,7 @@ main = function () {
         score: ["assets/sfx_point.mp3"],
         hurt: ["assets/sfx_hit.mp3"],
         fall: ["assets/sfx_die.mp3"],
-        swoosh: ["assets/sfx_swooshing.mp3"],
-        intro: ["assets/bom-dia-magnata.mp3"]
+        swoosh: ["assets/sfx_swooshing.mp3"]
       }
     };
     Object.keys(assets).forEach(function (type) {
@@ -595,7 +594,7 @@ main = function () {
     hurtSnd = game.add.audio("hurt");
     fallSnd = game.add.audio("fall");
     swooshSnd = game.add.audio("swoosh");
-    introSnd = game.add.audio("intro");
+
     game.input.onDown.add(function () {
       if (!bannerVisivel && !inputLocked) {
         flap();
@@ -643,9 +642,7 @@ main = function () {
     instText.renderable = false;
     gameStarted = true;
     if (firstPlay) {
-      if (introSnd) {
-        introSnd.play();
-      }
+      // Removed introSnd logic as requested
 
       // Auto-open leaderboard ONLY on first play
       if (typeof window.expandLeaderboard === 'function') {
