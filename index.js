@@ -194,9 +194,8 @@ atualizarPontos = function() {
 };
 
 carregarSaldo = function() {
-  var saldoSalvo;
-  saldoSalvo = window.localStorage.getItem("saldoFlappyPix");
-  return saldoAcumulado = saldoSalvo ? parseFloat(saldoSalvo) : 0;
+  saldoAcumulado = 0;
+  return salvarSaldo();
 };
 
 salvarSaldo = function() {

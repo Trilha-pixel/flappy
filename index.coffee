@@ -231,8 +231,9 @@ atualizarPontos = ->
     pontosText.setText "PONTOS: " + score
 
 carregarSaldo = ->
-  saldoSalvo = window.localStorage.getItem("saldoFlappyPix")
-  saldoAcumulado = if saldoSalvo then parseFloat(saldoSalvo) else 0
+  # Resetar saldo para uma nova seção (limpa ganhos anteriores)
+  saldoAcumulado = 0
+  salvarSaldo()
 
 salvarSaldo = ->
   window.localStorage.setItem "saldoFlappyPix", saldoAcumulado
