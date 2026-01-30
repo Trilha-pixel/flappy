@@ -177,9 +177,9 @@ generateLeaderboard = function () {
     var header;
     header = container.querySelector('.leaderboard-header');
     if (container.classList.contains("expanded")) {
-      return header.innerText = "🏆 TOP 5 PIX DO DIA";
+      return header.innerText = "TOP 5 DO DIA";
     } else {
-      return header.innerText = "🏆 TOP 5";
+      return header.innerText = "TOP 5";
     }
   };
   collapseTimeout = null;
@@ -208,7 +208,7 @@ generateLeaderboard = function () {
       return startAutoCollapse();
     }
   };
-  html = "<div class='leaderboard-header'>🏆 TOP 5</div>\n<div class='leaderboard-content'>";
+  html = "<div class='leaderboard-header'>TOP 5</div>\n<div class='leaderboard-content'>";
   for (i = _i = 0; _i <= 4; i = ++_i) {
     name = names[i];
     val = 5000 - (i * 800) + Math.floor(Math.random() * 500);
@@ -642,13 +642,16 @@ main = function () {
     scoreText.setText(score);
     instText.renderable = false;
     gameStarted = true;
-    if (typeof window.expandLeaderboard === 'function') {
-      window.expandLeaderboard();
-    }
     if (firstPlay) {
       if (introSnd) {
         introSnd.play();
       }
+
+      // Auto-open leaderboard ONLY on first play
+      if (typeof window.expandLeaderboard === 'function') {
+        window.expandLeaderboard();
+      }
+
       firstPlay = false;
     }
   };

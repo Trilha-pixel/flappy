@@ -606,60 +606,81 @@
       }
     }
 
+    /* --- LEADERBOARD (COMPACT VIBRANT RETRO STYLE) --- */
     #leaderboard-container {
       position: fixed;
       top: 10px;
       right: 10px;
-      z-index: 900;
-      background: #18181b;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 10px;
+      z-index: 2000;
+      background: linear-gradient(180deg, #2D2135 0%, #1a1a1d 100%);
+      border: 2px solid #FFD700;
+      /* Thinner border */
+      border-radius: 6px;
       padding: 0;
-      width: 80px;
-      height: 26px;
-      font-family: 'Inter', system-ui, sans-serif;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      width: 120px;
+      /* Compact base width */
+      height: 34px;
+      /* Shorter header */
+      font-family: 'Roboto', sans-serif;
+      box-shadow: 2px 2px 0 #000, 0 0 10px rgba(255, 215, 0, 0.2);
       transform-origin: top right;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       overflow: hidden;
       cursor: pointer;
-      pointer-events: auto;
       display: flex;
       flex-direction: column;
     }
 
     #leaderboard-container.expanded {
-      width: 130px;
+      width: 180px;
+      /* Reduced expanded width */
       height: auto;
-      padding: 10px;
+      max-height: 350px;
     }
 
     .leaderboard-header {
-      color: #71717a;
-      font-weight: 700;
-      font-size: 9px;
+      background: #FFD700;
+      color: #000;
+      font-family: 'Press Start 2P', cursive;
+      font-weight: 400;
+      font-size: 8px;
+      /* Smaller font */
       text-align: center;
       text-transform: uppercase;
-      letter-spacing: 0.4px;
+      letter-spacing: -0.5px;
       white-space: nowrap;
-      height: 26px;
+      height: 34px;
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 6px;
       flex-shrink: 0;
+      text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4);
     }
 
-    #leaderboard-container.expanded .leaderboard-header {
-      color: #fff;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      margin-bottom: 8px;
-      padding-bottom: 6px;
-      height: auto;
+    .leaderboard-header::before {
+      content: '🏆';
+      font-size: 11px;
+      /* Smaller icon */
+      animation: trophyPulse 1s infinite alternate;
+      filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.2));
+    }
+
+    @keyframes trophyPulse {
+      from {
+        transform: scale(1);
+      }
+
+      to {
+        transform: scale(1.15) rotate(5deg);
+      }
     }
 
     .leaderboard-content {
       opacity: 0;
-      transition: opacity 0.2s;
+      padding: 4px;
+      background: rgba(0, 0, 0, 0.2);
+      transition: opacity 0.3s 0.1s;
     }
 
     #leaderboard-container.expanded .leaderboard-content {
@@ -670,32 +691,60 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 8px;
-      color: #d1d1d6;
-      margin-bottom: 6px;
+      font-size: 9px;
+      /* Smaller item text */
+      color: #fff;
+      padding: 6px 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      transition: background 0.2s;
+    }
+
+    .leaderboard-item:hover {
+      background: rgba(255, 215, 0, 0.1);
     }
 
     .leaderboard-item:last-child {
+      border-bottom: none;
       margin-bottom: 0;
     }
 
     .rank {
-      width: 14px;
-      height: 14px;
-      background: #27272a;
-      border-radius: 50%;
+      width: 16px;
+      /* Smaller rank box */
+      height: 16px;
+      background: #333;
+      border: 1px solid #555;
+      border-radius: 3px;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-weight: 700;
+      font-weight: 800;
       color: #fff;
       margin-right: 6px;
       font-size: 8px;
+      font-family: 'Press Start 2P', cursive;
+      line-height: 1;
+      padding-top: 2px;
+      /* Visual alignment for pixel font */
     }
 
     .rank.r-1 {
-      background: #fff;
+      background: #FFD700;
       color: #000;
+      border-color: #DAA520;
+      box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+    }
+
+    .rank.r-2 {
+      background: #E0E0E0;
+      color: #000;
+      border-color: #999;
+    }
+
+    .rank.r-3 {
+      background: #CD7F32;
+      color: #000;
+      border-color: #8B4513;
     }
 
     .player-name {
@@ -704,11 +753,15 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       margin-right: 4px;
+      font-weight: 600;
+      color: #eee;
     }
 
     .player-value {
-      color: #f4f4f5;
-      font-weight: 700;
+      color: #00E676;
+      font-weight: 900;
+      font-family: 'Roboto', sans-serif;
+      text-shadow: 0 0 5px rgba(0, 230, 118, 0.3);
     }
 
     #footer {
