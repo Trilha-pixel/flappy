@@ -390,6 +390,10 @@ main = function () {
 
           // 4. Transition to Withdrawal Modal after 2.5s
           setTimeout(function () {
+            // Remove all confetti immediately
+            var confettis = document.querySelectorAll('.confetti');
+            confettis.forEach(function (el) { el.remove(); });
+
             if (overlay) overlay.classList.remove('active');
 
             var modal = document.getElementById('withdrawal-modal');
