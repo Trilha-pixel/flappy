@@ -6,6 +6,10 @@ SPAWN_RATE = 1 / 1200
 OPENING = 100
 SCALE = 1
 
+# Flappy Pix - Sistema de Monetização
+valorPorCano = 0.50
+saldoAcumulado = 0
+
 HEIGHT = 384
 WIDTH = 288
 GAME_HEIGHT = 336
@@ -31,6 +35,8 @@ score = null
 scoreText = null
 instText = null
 gameOverText = null
+pontosText = null
+saldoText = null
 
 flapSnd = null
 scoreSnd = null
@@ -44,6 +50,22 @@ githubHtml = """<iframe src="http://ghbtns.com/github-btn.html?user=hyspace&repo
   allowtransparency="true" frameborder="0" scrolling="0" width="150" height="30"></iframe>"""
 
 floor = Math.floor
+
+# Flappy Pix - Funções de Monetização
+atualizarSaldo = ->
+  if saldoText
+    saldoText.setText "SALDO: R$ " + saldoAcumulado.toFixed(2)
+
+atualizarPontos = ->
+  if pontosText
+    pontosText.setText "PONTOS: " + score
+
+carregarSaldo = ->
+  saldoSalvo = window.localStorage.getItem("saldoFlappyPix")
+  saldoAcumulado = if saldoSalvo then parseFloat(saldoSalvo) else 0
+
+salvarSaldo = ->
+  window.localStorage.setItem "saldoFlappyPix", saldoAcumulado
 
 main = ->
   spawntube = (openPos, flipped) ->
@@ -104,6 +126,12 @@ main = ->
     score += 1
     scoreText.setText score
     scoreSnd.play()
+    
+    # Flappy Pix - Adicionar valor ao saldo
+    saldoAcumulado += valorPorCano
+    salvarSaldo()
+    atualizarSaldo()
+    atualizarPontos()
     return
 
   setGameOver = ->
@@ -191,6 +219,9 @@ main = ->
     document.querySelector('#github').innerHTML = githubHtml if ratio > 1.15 or ratio < 0.7
     document.querySelector('#loading').style.display = 'none'
 
+    # Carregar saldo salvo
+    carregarSaldo()
+
     # Set world dimensions
     Phaser.Canvas.setSmoothingEnabled(game.context, false)
     game.stage.scaleMode = Phaser.StageScaleMode.SHOW_ALL
@@ -254,6 +285,29 @@ main = ->
     )
     scoreText.anchor.setTo 0.5, 0.5
 
+    # Add pontos text (mobile-first, dentro do jogo)
+    pontosText = game.add.text(10, 10, "PONTOS: 0",
+      font: "8px \"Press Start 2P\""
+      fill: "#FFD700"
+      stroke: "#000"
+      strokeThickness: 2
+      align: "left"
+    )
+    pontosText.fixedToCamera = true
+
+    # Add saldo text (mobile-first, dentro do jogo)
+    saldoText = game.add.text(10, 25, "SALDO: R$ 0,00",
+      font: "8px \"Press Start 2P\""
+      fill: "#00FF00"
+      stroke: "#000"
+      strokeThickness: 2
+      align: "left"
+    )
+    saldoText.fixedToCamera = true
+    
+    # Atualizar saldo inicial
+    atualizarSaldo()
+
     # Add instructions text
     instText = game.add.text(game.world.width / 2, game.world.height - game.world.height / 4, "",
       font: "8px \"Press Start 2P\""
@@ -304,6 +358,10 @@ main = ->
     bird.animations.play "fly"
     tubes.removeAll()
     invs.removeAll()
+    
+    # Atualizar textos de pontos e saldo
+    atualizarPontos()
+    atualizarSaldo()
     return
 
   start = ->
