@@ -380,10 +380,29 @@ main = function () {
             setTimeout(function (el) { return function () { if (el.parentNode) el.parentNode.removeChild(el); }; }(confetti), 6000);
           }
 
-          // 3. Show Victory Overlay
+          // 3. Show Victory Overlay (With Random Hype Phrase)
           var overlay = document.getElementById('victory-overlay');
           var vAmount = document.getElementById('victory-amount-display');
+          var vTitle = document.querySelector('.victory-title');
+
           if (overlay && vAmount) {
+            // Random Dopamine Phrases
+            var phrases = [
+              "VOCÊ É O CARA!",
+              "QUE JOGADA!",
+              "FATURE NO BOLSO!",
+              "METEU ESSA?!",
+              "LENDA DO PIX!",
+              "DEU AULA!",
+              "GENIAL DEMAIS!",
+              "SAQUE LIBERADO!",
+              "ZEROU O GAME!",
+              "REI DO LUCRO!"
+            ];
+            var randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+
+            if (vTitle) vTitle.innerText = randomPhrase;
+
             vAmount.innerText = "R$ " + saldoAcumulado.toFixed(2).replace('.', ',');
             overlay.classList.add('active');
           }
