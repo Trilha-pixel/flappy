@@ -249,6 +249,93 @@
         transform: translateY(-10px);
       }
     }
+
+    #leaderboard-container {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 900;
+      background: rgba(25, 25, 25, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 10px;
+      width: 180px;
+      font-family: 'Verdana', sans-serif;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      transform: scale(0.85);
+      transform-origin: top right;
+      pointer-events: none;
+    }
+
+    .leaderboard-header {
+      color: #FFD700;
+      font-weight: bold;
+      font-size: 11px;
+      text-align: center;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 5px;
+    }
+
+    .leaderboard-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: white;
+      margin-bottom: 6px;
+    }
+
+    .leaderboard-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .rank {
+      width: 16px;
+      height: 16px;
+      background: #333;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      color: #fff;
+      margin-right: 5px;
+      font-size: 9px;
+    }
+
+    .rank.r-1 {
+      background: #FFD700;
+      color: black;
+      box-shadow: 0 0 5px #FFD700;
+    }
+
+    .rank.r-2 {
+      background: #C0C0C0;
+      color: black;
+    }
+
+    .rank.r-3 {
+      background: #CD7F32;
+      color: black;
+    }
+
+    .player-name {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin-right: 5px;
+    }
+
+    .player-value {
+      color: #00E676;
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -282,7 +369,10 @@
   <div id="screen"></div>
   <div id="screen"></div>
   <div id="hype-container"></div>
+  <div id="screen"></div>
+  <div id="hype-container"></div>
   <div id="notification-container"></div>
+  <div id="leaderboard-container"></div>
   <div id="github"></div>
   <script src="index.min.js?v=flappypix_v4"></script>
   <script>

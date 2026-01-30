@@ -176,6 +176,29 @@ scheduleSocialProof = ->
   setTimeout runSequence, 3000
   return
 
+generateLeaderboard = ->
+  names = ["Roberto M.", "Fernanda K.", "André L.", "Patrícia S.", "Marcos P."]
+  container = document.querySelector("#leaderboard-container")
+  
+  html = "<div class='leaderboard-header'>🏆 TOP 5 DO DIA</div>"
+  
+  for i in [0..4]
+    name = names[i]
+    val = 5000 - (i * 800) + Math.floor(Math.random() * 500)
+    rankClass = "r-#{i+1}"
+    
+    html += """
+      <div class='leaderboard-item'>
+        <div class='rank #{rankClass}'>#{i+1}</div>
+        <div class='player-name'>#{name}</div>
+        <div class='player-value'>R$ #{val},00</div>
+      </div>
+    """
+    
+  container.innerHTML = html
+  return
+
+generateLeaderboard()
 scheduleSocialProof()
 
 atualizarPontos = ->
