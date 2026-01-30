@@ -50,32 +50,53 @@
     }
 
     .banner-content {
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 24px;
+      background: #DED895;
+      /* Game Menu Beige */
+      border: 4px solid #543847;
+      /* Dark Border */
+      border-radius: 6px;
+      padding: 20px;
       max-width: 90%;
       width: 320px;
       text-align: center;
-      font-family: 'Roboto', sans-serif;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      font-family: 'Press Start 2P', cursive;
+      /* PIXEL FONT */
+      box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.5);
+      /* Hard Shadow */
       position: relative;
       animation: modalPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .banner-content h1 {
-      color: #111;
-      font-size: 26px;
-      margin-bottom: 12px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: -0.5px;
+      font-family: 'Press Start 2P', cursive;
+      /* Keep Pixel Font for Header */
+      color: #F48C2C;
+      /* Logo Orange */
+      font-size: 20px;
+      margin-bottom: 16px;
+      line-height: 1.5;
+      text-shadow: 2px 2px 0px #000;
+      /* Retro Stroke */
+      -webkit-text-stroke: 1px #000;
     }
 
     .banner-content p {
-      font-size: 16px;
-      line-height: 1.4;
-      color: #333;
+      font-size: 10px;
+      line-height: 1.6;
+      color: #543847;
+      margin-bottom: 16px;
+      font-weight: normal;
+    }
+
+    .feature-list {
+      text-align: left;
       margin-bottom: 20px;
+      font-size: 12px;
+      color: #543847;
+    }
+
+    .feature-item {
+      margin-bottom: 8px;
     }
 
     .banner-content .highlight {
@@ -86,56 +107,56 @@
 
     .banner-content .limit-badge {
       display: inline-block;
-      background: #fff7ed;
-      /* Light orange pill */
-      color: #c2410c;
-      /* Deep orange text */
-      padding: 6px 16px;
-      border-radius: 100px;
-      /* Full pill shape */
-      font-weight: 700;
-      font-size: 13px;
-      margin-bottom: 24px;
-      border: 1px solid #ffedd5;
+      background: #e67e22;
+      /* Basic Orange */
+      color: #fff;
+      padding: 8px 10px;
+      border-radius: 0px;
+      /* Blocky */
+      border: 2px solid #000;
+      box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+      font-size: 9px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      font-family: 'Press Start 2P', cursive;
+      font-weight: normal;
     }
 
     .banner-input {
       width: 100%;
-      padding: 14px 16px;
+      padding: 12px;
       margin-bottom: 12px;
-      border: 2px solid #e2e8f0;
-      border-radius: 12px;
-      font-size: 15px;
-      font-family: 'Roboto', sans-serif;
+      border: 4px solid #543847;
+      background: #fff;
+      border-radius: 0px;
+      font-size: 10px;
+      font-family: 'Press Start 2P', cursive;
       box-sizing: border-box;
       outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .banner-input:focus {
-      border-color: #25D366;
     }
 
     .banner-btn {
-      background: linear-gradient(to bottom, #25D366 0%, #128C7E 100%);
+      background: #55bf04;
+      /* START Button Green */
       color: white;
-      border: none;
-      padding: 16px 32px;
-      border-radius: 12px;
-      /* Rounded button */
-      font-size: 18px;
-      font-weight: 900;
+      border: 4px solid #fff;
+      outline: 4px solid #000;
+      padding: 14px 10px;
+      border-radius: 0px;
+      font-size: 12px;
       cursor: pointer;
       text-transform: uppercase;
-      transition: transform 0.1s;
-      box-shadow: 0 4px 0 #075E54, 0 10px 20px rgba(37, 211, 102, 0.3);
-      width: 100%;
-      margin-top: 10px;
-      font-family: 'Roboto', sans-serif;
+      box-shadow: 0 6px 0 #2d6b00;
+      /* 3D Button */
+      width: calc(100% - 8px);
+      /* Account for outlines */
+      margin: 10px 4px;
+      font-family: 'Press Start 2P', cursive;
     }
 
     .banner-btn:active {
-      transform: scale(0.95);
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 #2d6b00;
     }
 
     #hype-container {
