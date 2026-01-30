@@ -345,6 +345,12 @@ main = function () {
     invs.forEach(function (inv) {
       inv.body.velocity.x = 0;
     });
+    // Hide HUD on Game Over
+    if (pontosText) pontosText.renderable = false;
+    if (saldoText) saldoText.renderable = false;
+    if (multiText) multiText.renderable = false;
+    if (floatingText) floatingText.alpha = 0;
+
     game.time.events.remove(tubesTimer);
     game.time.events.add(1000, function () {
       return game.input.onTap.addOnce(function () {
@@ -534,7 +540,7 @@ main = function () {
       align: "center"
     });
     scoreText.anchor.setTo(0.5, 0.5);
-    pontosText = game.add.text(10, 10, "PONTOS: 0", {
+    pontosText = game.add.text(10, 5, "PONTOS: 0", {
       font: "8px \"Press Start 2P\"",
       fill: "#FFD700",
       stroke: "#000",
@@ -542,7 +548,7 @@ main = function () {
       align: "left"
     });
     pontosText.fixedToCamera = true;
-    saldoText = game.add.text(10, 25, "SALDO: R$ 0,00", {
+    saldoText = game.add.text(10, 18, "SALDO: R$ 0,00", {
       font: "8px \"Press Start 2P\"",
       fill: "#00FF00",
       stroke: "#000",
@@ -550,7 +556,7 @@ main = function () {
       align: "left"
     });
     saldoText.fixedToCamera = true;
-    multiText = game.add.text(10, 40, "MULT: 1.0x (R$1.00/s)", {
+    multiText = game.add.text(10, 31, "MULT: 1.0x (R$1.00/s)", {
       font: "8px \"Press Start 2P\"",
       fill: "#FFFFFF",
       stroke: "#000",
@@ -620,6 +626,12 @@ main = function () {
     if (saldoText) {
       saldoText.fill = "#00FF00";
     }
+
+    // Show HUD
+    if (pontosText) pontosText.renderable = true;
+    if (saldoText) saldoText.renderable = true;
+    if (multiText) multiText.renderable = true;
+
     atualizarPontos();
     atualizarSaldo();
   };
@@ -728,6 +740,10 @@ main = function () {
           bird.body.velocity.y = 0;
           bird.body.allowGravity = false;
           bird.body.gravity.y = 0;
+        }
+        // Force hide floating text on game over loops
+        if (floatingText) {
+          floatingText.alpha = 0;
         }
       }
     } else {
