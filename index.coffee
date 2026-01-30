@@ -185,14 +185,29 @@ generateLeaderboard = ->
     else
       header.innerText = "🏆 TOP 5"
   
+  # Auto collapse logic
+  collapseTimeout = null
+  startAutoCollapse = ->
+    clearTimeout(collapseTimeout) if collapseTimeout
+    collapseTimeout = setTimeout ->
+      if container.classList.contains("expanded")
+        container.classList.remove("expanded")
+        updateHeader()
+    , 5000 # 5 seconds
+  
   # Add toggle functionality
   container.addEventListener "click", ->
     container.classList.toggle("expanded")
+    updateHeader()
+    if container.classList.contains("expanded")
+      startAutoCollapse()
+      
   # Global function to expand leaderboard
   window.expandLeaderboard = ->
     if !container.classList.contains("expanded")
       container.classList.add("expanded")
       updateHeader()
+      startAutoCollapse()
   
   # Start collapsed (remove initial expanded class)
   

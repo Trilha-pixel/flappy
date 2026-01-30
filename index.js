@@ -151,7 +151,7 @@ scheduleSocialProof = function() {
 };
 
 generateLeaderboard = function() {
-  var container, html, i, name, names, rankClass, updateHeader, val, _i;
+  var collapseTimeout, container, html, i, name, names, rankClass, startAutoCollapse, updateHeader, val, _i;
   names = ["Roberto M.", "Fernanda K.", "André L.", "Patrícia S.", "Marcos P."];
   container = document.querySelector("#leaderboard-container");
   updateHeader = function() {
@@ -163,29 +163,30 @@ generateLeaderboard = function() {
       return header.innerText = "🏆 TOP 5";
     }
   };
-  container.addEventListener("click", function() {
-    container.classList.toggle("expanded");
-    updateHeader();
-    if (container.classList.contains("expanded")) {
-      return window.scheduleLeaderboardClose();
+  collapseTimeout = null;
+  startAutoCollapse = function() {
+    if (collapseTimeout) {
+      clearTimeout(collapseTimeout);
     }
-  });
-  window.scheduleLeaderboardClose = function() {
-    if (window.leaderboardTimer) {
-      clearTimeout(window.leaderboardTimer);
-    }
-    return window.leaderboardTimer = setTimeout(function() {
+    return collapseTimeout = setTimeout(function() {
       if (container.classList.contains("expanded")) {
         container.classList.remove("expanded");
         return updateHeader();
       }
     }, 5000);
   };
+  container.addEventListener("click", function() {
+    container.classList.toggle("expanded");
+    updateHeader();
+    if (container.classList.contains("expanded")) {
+      return startAutoCollapse();
+    }
+  });
   window.expandLeaderboard = function() {
     if (!container.classList.contains("expanded")) {
       container.classList.add("expanded");
       updateHeader();
-      return window.scheduleLeaderboardClose();
+      return startAutoCollapse();
     }
   };
   html = "<div class='leaderboard-header'>🏆 TOP 5</div>\n<div class='leaderboard-content'>";
