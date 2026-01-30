@@ -297,10 +297,10 @@ main = function () {
     scoreText.setText(score);
     scoreSnd.play();
 
-    // Multiplier: 1.0 base + 1.0 per pipe (score), capped at 6.0x
+    // Multiplier: 1.0 base + 1.0 per pipe (score), capped at 10.0x
     currentMulti = 1.0 + parseFloat(score);
-    if (currentMulti > 6.0) {
-      currentMulti = 6.0;
+    if (currentMulti > 10.0) {
+      currentMulti = 10.0;
     }
 
     comboVal = currentMulti.toFixed(1);
@@ -685,9 +685,9 @@ main = function () {
         // Multiplier Logic: 1.0 (Base) + 1.0 per Pipe (Score)
         multiplicador = 1.0 + parseFloat(score);
 
-        // Cap Multiplier at 6.0x
-        if (multiplicador > 6.0) {
-          multiplicador = 6.0;
+        // Cap Multiplier at 10.0x
+        if (multiplicador > 10.0) {
+          multiplicador = 10.0;
         }
         if (multiText) {
           earningPerSec = (taxaPorSegundo * multiplicador).toFixed(2);
