@@ -58,6 +58,52 @@ atualizarSaldo = ->
   if saldoText
     saldoText.setText "SALDO: R$ " + saldoAcumulado.toFixed(2)
 
+lastMsg = ""
+
+showHypeMessage = ->
+  msgs = [
+    "UAU!"
+    "PARABÉNS!"
+    "NOVO MILIONÁRIO!"
+    "PIX CHEGANDO!"
+    "RUMO AO MILHÃO!"
+    "QUE JOGADA!"
+    "TÁ CHOVENDO PIX!"
+    "SÓ LUCRO!"
+    "AULA DE FATURE!"
+    "RECEBA!"
+    "MAIS DINHEIRO!"
+    "TOQUE DE MIDAS!"
+    "SEGURA O PIX!"
+    "FOGUETE NÃO TEM RÉ!"
+    "DECOLOU!"
+    "MESTRE DO PIX!"
+    "PIX NO BOLSO!"
+    "TÁ RICO!"
+    "OLHA O GANHO!"
+    "VAI QUE É TUA!"
+  ]
+  
+  # Avoid repetition
+  loop
+    msg = msgs[Math.floor(Math.random() * msgs.length)]
+    break if msg isnt lastMsg
+  
+  lastMsg = msg
+  
+  el = document.createElement("div")
+  el.className = "hype-message"
+  el.innerText = msg
+  el.style.top = (20 + Math.random() * 40) + "%" 
+  
+  container = document.querySelector("#hype-container")
+  container.appendChild(el)
+  
+  setTimeout ->
+    container.removeChild(el)
+  , 2000
+  return
+
 atualizarPontos = ->
   if pontosText
     pontosText.setText "PONTOS: " + score
@@ -134,6 +180,10 @@ main = ->
     salvarSaldo()
     atualizarSaldo()
     atualizarPontos()
+    
+    # Trigger Hype Animation
+    showHypeMessage()
+    
     return
 
   setGameOver = ->
