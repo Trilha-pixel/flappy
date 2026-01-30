@@ -664,7 +664,10 @@ main = function () {
         }
         if (multiText) {
           earningPerSec = (taxaPorSegundo * multiplicador).toFixed(2);
-          multiText.setText("MULT: " + multiplicador.toFixed(1) + ("x (R$" + earningPerSec + "/s)"));
+          var newMultiStr = "MULT: " + multiplicador.toFixed(1) + ("x (R$" + earningPerSec + "/s)");
+          if (multiText.text !== newMultiStr) {
+            multiText.setText(newMultiStr);
+          }
           if (multiplicador > 1.0) {
             multiText.fill = "#FFD700";
             s = 1 + Math.sin(now / 150) * 0.1;
@@ -690,7 +693,10 @@ main = function () {
           }
         }
         if (saldoText) {
-          saldoText.setText("SALDO: R$ " + saldoAcumulado.toFixed(2));
+          var newSaldoStr = "SALDO: R$ " + saldoAcumulado.toFixed(2);
+          if (saldoText.text !== newSaldoStr) {
+            saldoText.setText(newSaldoStr);
+          }
         }
         if (floatingText) {
           floatingText.x = bird.x;
