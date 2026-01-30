@@ -329,7 +329,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 1000;
+      z-index: 4000;
+      /* Increased to be above everything */
     }
 
     .banner-content {
@@ -994,7 +995,8 @@
       <p>"Por que perder tempo com jogos que não te pagam nada?" No Flappy Pix, sua habilidade é o seu multiplicador.
         Enquanto outros jogam por diversão, nossos membros jogam por faturamento!"</p>
       <input type="email" class="banner-input" placeholder="Digite seu melhor email">
-      <button class="banner-btn" onclick="window.gameInstance.clickBanner()">COMECE A GANHAR!</button>
+      <button class="banner-btn" onclick="window.gameInstance.clickBanner()"
+        ontouchstart="window.gameInstance.clickBanner()">COMECE A GANHAR!</button>
     </div>
   </div>
   <script>
