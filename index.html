@@ -735,7 +735,7 @@
       pointer-events: none;
     }
 
-    /* --- STUNNING MODERN MODAL (GLASSMORPHISM) --- */
+    /* --- ULTRA-PREMIUM MODAL (EMERALD GLASS) --- */
     #withdrawal-modal {
       display: none;
       position: fixed;
@@ -743,12 +743,13 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(18, 18, 18, 0.8);
+      background: rgba(6, 18, 15, 0.9);
+      /* Deep emerald dark */
       z-index: 3000;
       justify-content: center;
       align-items: center;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
       font-family: 'Inter', 'Roboto', sans-serif;
       padding: 20px;
       box-sizing: border-box;
@@ -758,13 +759,13 @@
       position: relative;
       z-index: 10;
       width: 100%;
-      max-width: 380px;
-      border-radius: 32px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      max-width: 360px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), inset 0 0 40px rgba(255, 255, 255, 0.02);
       padding: 32px 24px;
       display: flex;
       flex-direction: column;
@@ -773,169 +774,218 @@
       color: #fff;
     }
 
-    .glass-logo {
-      width: 64px;
-      height: 64px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
+    /* Emerald Border Glow */
+    .glass-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+      border-radius: inherit;
+      box-shadow: inset 0 0 20px rgba(0, 255, 128, 0.1);
+      pointer-events: none;
+    }
+
+    .pix-seal {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 255, 128, 0.1);
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(0, 255, 128, 0.2);
+    }
+
+    .pix-seal-icon {
+      width: 16px;
+      height: 16px;
+      fill: #00ff88;
+    }
+
+    .pix-seal-text {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: #00ff88;
+      text-transform: uppercase;
+    }
+
+    .glass-logo-small {
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      margin-bottom: 12px;
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .glass-logo img {
+    .glass-logo-small img {
       width: 70%;
       height: 70%;
       object-fit: contain;
     }
 
     .glass-title {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 24px;
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 8px;
       text-align: center;
-      background: linear-gradient(to bottom, #fff, #aaa);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    .balance-hero {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .balance-label {
+      font-size: 11px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 2px;
+    }
+
+    .balance-amount {
+      font-size: 38px;
+      font-weight: 900;
+      color: #00ff88;
+      text-shadow: 0 0 25px rgba(0, 255, 136, 0.4);
+    }
+
+    /* Updated Key Selector with Icons */
+    .key-selector {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+
+    .key-option {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 12px 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      color: #64748b;
+    }
+
+    .key-option svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+
+    .key-option span {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .key-option.active {
+      background: rgba(0, 255, 128, 0.1);
+      border-color: #00ff88;
+      color: #00ff88;
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.1);
+      transform: translateY(-2px);
     }
 
     .glass-form {
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
     }
 
-    .glass-input-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .glass-label {
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.6);
-      font-weight: 500;
-      padding-left: 4px;
+    .glass-input-wrapper {
+      position: relative;
+      width: 100%;
+      margin-bottom: 24px;
     }
 
     .glass-input {
       width: 100%;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(0, 0, 0, 0.3);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      padding: 14px 20px;
+      border-radius: 14px;
+      padding: 16px;
       color: #fff;
-      font-size: 14px;
+      font-size: 16px;
       outline: none;
-      transition: all 0.2s;
+      transition: all 0.3s;
       box-sizing: border-box;
+      text-align: center;
+      font-weight: 600;
     }
 
     .glass-input:focus {
-      border-color: rgba(255, 255, 255, 0.3);
-      background: rgba(255, 255, 255, 0.08);
-      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05);
+      border-color: #00ff88;
+      background: rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.15);
     }
 
-    .glass-btn-primary {
+    .primary-withdraw-btn {
       width: 100%;
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
-      font-weight: 600;
-      padding: 14px;
-      border-radius: 50px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      cursor: pointer;
-      transition: all 0.2s;
-      font-size: 15px;
-      margin-top: 8px;
-    }
-
-    .glass-btn-primary:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateY(-1px);
-    }
-
-    .glass-btn-secondary {
-      width: 100%;
-      background: linear-gradient(180deg, #232526 0%, #2d2e30 100%);
-      color: #fff;
-      font-weight: 600;
-      padding: 14px;
-      border-radius: 50px;
+      background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+      color: #022c22;
       border: none;
+      padding: 18px;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 900;
       cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 12px 24px rgba(0, 255, 136, 0.2);
+      transition: all 0.2s;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      font-size: 14px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
-    .glass-footer {
+    .primary-withdraw-btn:active {
+      transform: scale(0.97) translateY(2px);
+      box-shadow: 0 5px 10px rgba(0, 255, 136, 0.2);
+    }
+
+    .primary-withdraw-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      filter: grayscale(1);
+    }
+
+    .modal-footer {
       margin-top: 24px;
-      text-align: center;
-    }
-
-    .glass-footer-text {
       font-size: 11px;
-      color: rgba(255, 255, 255, 0.4);
-    }
-
-    .glass-footer-link {
-      color: rgba(255, 255, 255, 0.8);
-      text-decoration: underline;
-      cursor: pointer;
-    }
-
-    /* Social Proof Section */
-    .glass-social {
-      margin-top: 40px;
+      color: #64748b;
       display: flex;
       flex-direction: column;
+      gap: 6px;
       align-items: center;
-      gap: 12px;
     }
 
-    .social-count {
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.5);
-    }
-
-    .social-count span {
-      color: #fff;
+    .secure-line {
+      display: flex;
+      align-items: center;
+      gap: 5px;
       font-weight: 600;
     }
 
-    .social-avatars {
-      display: flex;
-      align-items: center;
-    }
-
-    .social-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 2px solid #121212;
-      margin-left: -8px;
-      background: #333;
-      overflow: hidden;
-    }
-
-    .social-avatar:first-child {
-      margin-left: 0;
-    }
-
-    .social-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .secure-line svg {
+      color: #00ff88;
     }
   </style>
 </head>
@@ -1055,48 +1105,117 @@
     setTimeout(updateTicker, 1500);
   </script>
 
-  <!-- WITHDRAWAL MODAL (Stunning Design) -->
+  <!-- WITHDRAWAL MODAL (REFINED EMERALD VERSION) -->
   <div id="withdrawal-modal">
     <div class="glass-card">
-      <div class="glass-logo">
+      <div class="pix-seal">
+        <svg class="pix-seal-icon" viewBox="0 0 24 24">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" />
+          <path d="M2 17L12 22L22 17M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" fill="none"
+            stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span class="pix-seal-text">Pagamento Instantâneo via PIX</span>
+      </div>
+
+      <div class="glass-logo-small">
         <img src="assets/flappylogo.png" alt="logo">
       </div>
-      <h2 class="glass-title">Flappy Pix Saque</h2>
-      <div class="glass-form">
-        <div class="glass-input-group">
-          <label class="glass-label">Chave PIX (CPF, Email ou Telefone)</label>
-          <input type="text" id="pix-key-input" placeholder="Digite sua chave aqui..." class="glass-input">
+
+      <h2 class="glass-title">Resgate seu Lucro</h2>
+
+      <div class="balance-hero">
+        <div class="balance-label">Disponível para Saque</div>
+        <div class="balance-amount" id="modal-balance-display">R$ 0,00</div>
+      </div>
+
+      <div class="key-selector">
+        <div class="key-option active" onclick="selectKeyType('cpf', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="16" rx="2" />
+            <path d="M7 8h10M7 12h10M7 16h4" />
+          </svg>
+          <span>CPF</span>
         </div>
-        <div class="glass-input-group">
-          <label class="glass-label">Valor Disponível</label>
-          <input type="text" id="withdraw-amount" readonly class="glass-input" value="R$ 0,00">
+        <div class="key-option" onclick="selectKeyType('tel', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="5" y="2" width="14" height="20" rx="2" />
+            <path d="M12 18h.01" />
+          </svg>
+          <span>Celular</span>
         </div>
-        <hr style="opacity: 0.1; margin: 8px 0;">
-        <div>
-          <button id="btn-request-saque" class="glass-btn-primary">Solicitar Saque via PIX</button>
-          <button style="margin-top: 12px;" class="glass-btn-secondary">
-            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" style="width: 18px;">
-            Acessar com Google
-          </button>
-          <div class="glass-footer">
-            <span class="glass-footer-text">
-              Ambiente 100% Seguro. <br>
-              <span class="glass-footer-link">Ver termos de faturamento</span>
-            </span>
-          </div>
+        <div class="key-option" onclick="selectKeyType('email', this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
+          <span>E-mail</span>
         </div>
       </div>
-      <div class="glass-social">
-        <p class="social-count">Junte-se a <span>+14.000</span> jogadores ativos</p>
-        <div class="social-avatars">
-          <div class="social-avatar"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="u"></div>
-          <div class="social-avatar"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="u"></div>
-          <div class="social-avatar"><img src="https://randomuser.me/api/portraits/men/54.jpg" alt="u"></div>
-          <div class="social-avatar"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="u"></div>
+
+      <div class="glass-form">
+        <div class="glass-input-wrapper">
+          <input type="text" id="pix-key-input" placeholder="000.000.000-00" class="glass-input">
+        </div>
+
+        <button id="btn-request-saque" class="primary-withdraw-btn">
+          Solicitar Saque via PIX
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+
+        <div class="modal-footer">
+          <div class="secure-line">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
+            </svg>
+            Transferência Segura via PIX
+          </div>
+          <div style="opacity: 0.5">Ambiente monitorado e protegido © 2026</div>
         </div>
       </div>
     </div>
   </div>
+
+  <script>
+    let currentKeyType = 'cpf';
+    const pixInputElement = document.getElementById('pix-key-input');
+
+    function selectKeyType(type, el) {
+      currentKeyType = type;
+      document.querySelectorAll('.key-option').forEach(opt => opt.classList.remove('active'));
+      el.classList.add('active');
+
+      if (pixInputElement) {
+        pixInputElement.value = '';
+        if (type === 'cpf') pixInputElement.placeholder = '000.000.000-00';
+        else if (type === 'tel') pixInputElement.placeholder = '(00) 00000-0000';
+        else if (type === 'email') pixInputElement.placeholder = 'seu@email.com';
+
+        pixInputElement.focus();
+      }
+    }
+
+    function applyMask(value, type) {
+      if (type === 'cpf') {
+        return value.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})/, '$1-$2').replace(/(-\d{2})\d+?$/, '$1');
+      } else if (type === 'tel') {
+        return value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{5})(\d)/, '$1-$2').replace(/(-\d{4})\d+?$/, '$1');
+      }
+      return value;
+    }
+
+    if (pixInputElement) {
+      pixInputElement.addEventListener('input', (e) => {
+        if (currentKeyType === 'cpf' || currentKeyType === 'tel') {
+          e.target.value = applyMask(e.target.value, currentKeyType);
+        }
+      });
+    }
+  </script>
 
   <script>
     const btnWithdraw = document.getElementById('btn-request-saque');
