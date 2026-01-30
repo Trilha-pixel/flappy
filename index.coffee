@@ -15,7 +15,7 @@ multiplicador = 1
 multiplierTimer = 0
 sessionEarnings = 0
 floatingText = null
-tentativasRestantes = 3
+tentativasRestantes = 5
 bannerVisivel = true
 
 HEIGHT = 384

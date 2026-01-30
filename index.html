@@ -99,6 +99,23 @@
       border: 1px solid #ffedd5;
     }
 
+    .banner-input {
+      width: 100%;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: 'Roboto', sans-serif;
+      box-sizing: border-box;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .banner-input:focus {
+      border-color: #25D366;
+    }
+
     .banner-btn {
       background: linear-gradient(to bottom, #25D366 0%, #128C7E 100%);
       color: white;
@@ -587,9 +604,10 @@
     <div class="banner-content">
       <h1>SUA CONTA ESTÁ ATIVA!</h1>
       <p>GANHE <span class="highlight">R$ 1,00</span> POR CADA SEGUNDO DE VOO</p>
-      <div class="limit-badge">APENAS 3 TENTATIVAS RESTANTES</div>
+      <div class="limit-badge">APENAS 5 TENTATIVAS RESTANTES</div>
       <p>Você tem talento para faturar alto hoje?</p>
-      <button class="banner-btn" onclick="window.gameInstance.clickBanner()">COMEÇAR AGORA!</button>
+      <input type="email" class="banner-input" placeholder="digite seu melhor email">
+      <button class="banner-btn" onclick="window.gameInstance.clickBanner()">COMECE A GANHAR!</button>
     </div>
   </div>
   <script>
