@@ -219,9 +219,11 @@
     }
 
     .goal-icon img {
-      width: 80%;
-      height: 80%;
+      width: 110%;
+      /* Slightly larger for the full logo */
+      height: 110%;
       object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
     }
 
     /* FLASH EFFECT ON UPDATE */
@@ -964,7 +966,7 @@
       <div class="goal-fill" id="dist-progress" style="width: 94%;"></div>
       <div class="goal-content">
         <div class="goal-icon">
-          <img src="assets/bird.png" alt="icon">
+          <img src="assets/flappylogo.png" alt="icon">
         </div>
         <div class="goal-text-left">Meta de Distribuição</div>
         <div class="goal-text-right">R$ <span id="dist-val">94.210</span> <span>/ R$ 100k</span></div>
@@ -978,37 +980,34 @@
   </div>
 
   <script>
-    // --- DISTRIBUTION LOGIC ---
+    // --- SYNCED DISTRIBUTION & LIVEPIX LOGIC ---
     let distValue = 94210.35;
     const distEl = document.getElementById('dist-val');
     const distProgress = document.getElementById('dist-progress');
-    const dailyGoal = 100000.00; // Mock goal for the progress bar
+    const dailyGoal = 100000.00;
+    const tickerContainer = document.getElementById('live-ticker');
+    const tickerNames = ["Felipe M.", "Lucas R.", "Ana K.", "João P.", "Mariana S.", "Roberto T.", "Giulia B.", "Pedro H.", "Camila L.", "Ricardo W.", "Beatriz G.", "Gustavo O."];
 
-    setInterval(() => {
-      // Increment by small random amount (R$ 1 - R$ 15)
-      distValue += (Math.random() * 14) + 1;
+    const messages = [
+      "Joga muito!", "Saque instantâneo real!", "Obrigado Flappy Pix!", "Melhor jogo de faturamento", "Bati o recorde!", "PIX na mão!", "Vou recomendar pra todo mundo", "Simplesmente incrível!", "Caiu na hora!", "Já vou sacar de novo"
+    ];
+
+    function updateProgressBar(amountToAdd) {
+      distValue += amountToAdd;
       distEl.innerText = Math.floor(distValue).toLocaleString('pt-BR');
 
-      // Trigger Flash
+      // Trigger Flash feedback
       distEl.parentElement.classList.remove('value-flash');
       void distEl.offsetWidth; // Trigger reflow
       distEl.parentElement.classList.add('value-flash');
 
-      // Update progress bar
+      // Update progress bar width
       let progressPercent = (distValue / dailyGoal) * 100;
-      if (progressPercent > 100) progressPercent = 99.9; // Cap at near-full
+      if (progressPercent > 100) progressPercent = 99.9;
       distProgress.style.width = progressPercent + '%';
-    }, 4500);
+    }
 
-    // --- LIVEPIX LOGIC ---
-    const tickerContainer = document.getElementById('live-ticker');
-    const tickerNames = ["Felipe M.", "Lucas R.", "Ana K.", "João P.", "Mariana S.", "Roberto T.", "Giulia B.", "Pedro H.", "Camila L."];
-
-    const messages = [
-      "Joga muito!", "Saque instantâneo real!", "Obrigado Flappy Pix!", "Melhor jogo de faturamento", "Bati o recorde!", "PIX na mão!", "Vou recomendar pra todo mundo"
-    ];
-
-    function createLivePix(name, amount, action) {
+    function createLivePix(name, amountStr, action) {
       const msg = messages[Math.floor(Math.random() * messages.length)];
       return `
             <div class="livepix-card">
@@ -1018,7 +1017,7 @@
                     </div>
                 </div>
                 <div class="livepix-body">
-                    <div class="livepix-header"><span>${name}</span> ${action} <span class="livepix-amount">R$ ${amount}</span></div>
+                    <div class="livepix-header"><span>${name}</span> ${action} <span class="livepix-amount">R$ ${amountStr}</span></div>
                     <div class="livepix-message">${msg}</div>
                 </div>
             </div>
@@ -1027,21 +1026,28 @@
 
     function updateTicker() {
       const name = tickerNames[Math.floor(Math.random() * tickerNames.length)];
-      const amount = (Math.random() * 80 + 20).toFixed(2).replace('.', ',');
-      const actions = ["sacou", "assinou PRO", "recebeu", "faturou"];
+      const amountNum = (Math.random() * 80 + 20); // Amount to add to distribution
+      const amountStr = amountNum.toFixed(2).replace('.', ',');
+
+      const actions = ["sacou", "recebeu", "faturou", "resgatou"];
       const action = actions[Math.floor(Math.random() * actions.length)];
 
-      tickerContainer.innerHTML = createLivePix(name, amount, action);
+      // 1. Show the LivePix notification
+      tickerContainer.innerHTML = createLivePix(name, amountStr, action);
 
-      // Clear after 3.5s to wait for next one
+      // 2. IMMEDIATELY Sync the progress bar with this amount
+      updateProgressBar(amountNum);
+
+      // Clear notification after 4s
       setTimeout(() => {
         tickerContainer.innerHTML = "";
-      }, 3500);
+      }, 4000);
     }
 
-    // Interval slightly larger than the timeout to allow gap
-    setInterval(updateTicker, 6000);
-    setTimeout(updateTicker, 1000);
+    // Update ticker every 6.5 seconds
+    setInterval(updateTicker, 6500);
+    // Initial update after 1.5s
+    setTimeout(updateTicker, 1500);
   </script>
 
   <!-- Withdrawal Form Modal -->
