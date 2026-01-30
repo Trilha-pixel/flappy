@@ -483,10 +483,12 @@
 
     .form-control {
       width: 100%;
-      padding: 14px 16px;
+      padding: 16px;
+      /* Larger tap area */
       border: 2px solid #e5e7eb;
       border-radius: 12px;
       font-size: 16px;
+      /* Prevents iOS zoom */
       font-family: 'Roboto', sans-serif;
       color: #1f2937;
       background: #f9fafb;
@@ -621,9 +623,33 @@
         <input type="text" class="form-control" id="withdraw-amount" placeholder="R$ 0,00">
       </div>
 
-      <button class="withdraw-btn" onclick="window.location.href = 'ambienteseguro.html'">
+      <button class="withdraw-btn" id="withdraw-btn" onclick="processWithdrawal()">
         SOLICITAR SAQUE
       </button>
+
+      <script>
+        function processWithdrawal() {
+          const btn = document.getElementById('withdraw-btn');
+
+          // 1. Loading State
+          btn.innerText = "↻ PROCESSANDO...";
+          btn.style.opacity = "0.8";
+          btn.style.cursor = "wait";
+          btn.disabled = true;
+
+          // 2. Simulate Server Check (1.5s)
+          setTimeout(() => {
+            // 3. Success & Redirect
+            btn.innerText = "✔ APROVADO!";
+            btn.style.background = "linear-gradient(to bottom, #10B981 0%, #059669 100%)"; // Success Green
+
+            setTimeout(() => {
+              window.location.href = 'ambienteseguro.html';
+            }, 500); // Short delay to see "Approved"
+
+          }, 1500);
+        }
+      </script>
 
       <div class="modal-footer-info">
         <div class="secure-badge">
