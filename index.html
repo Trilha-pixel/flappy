@@ -13,6 +13,192 @@
       padding: 0;
       height: 100%;
       background: linear-gradient(135deg, #87CEEB 0%, #FF8C00 100%);
+      overflow: hidden;
+      /* Prevent scrolling for immersive game feel */
+    }
+
+    #live-ticker {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 95%;
+      max-width: 380px;
+      z-index: 920;
+      pointer-events: none;
+    }
+
+    .livepix-card {
+      background: #fff;
+      border-radius: 8px;
+      display: flex;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      font-family: 'Roboto', sans-serif;
+      animation: livepixPopup 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .livepix-side {
+      background: #1a1f2e;
+      /* LivePix Blue-Black */
+      width: 65px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .livepix-logo {
+      width: 40px;
+      height: 40px;
+      background: #fff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .livepix-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transform: scale(1.2);
+      /* Zoom in on bird icon */
+    }
+
+    .livepix-body {
+      padding: 12px 15px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .livepix-header {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 2px;
+      font-weight: 500;
+    }
+
+    .livepix-header span {
+      font-weight: 900;
+      color: #1a1f2e;
+    }
+
+    .livepix-amount {
+      font-weight: 900;
+      color: #0b5cf2;
+      /* LivePix Blue */
+      margin-left: 4px;
+    }
+
+    .livepix-message {
+      font-size: 12px;
+      color: #666;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    @keyframes livepixPopup {
+      0% {
+        transform: translateY(50px) scale(0.8);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    #distribution-container {
+      position: fixed;
+      bottom: 125px;
+      /* Above the ticker */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 95%;
+      max-width: 400px;
+      background: rgba(0, 0, 0, 0.9);
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 8px 12px;
+      z-index: 920;
+      font-family: 'Roboto', sans-serif;
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .dist-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      color: #fff;
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .dist-label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .dist-value {
+      color: #00ff00;
+      text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: #222;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid #333;
+    }
+
+    .progress-fill {
+      width: 94%;
+      height: 100%;
+      background: linear-gradient(90deg, #166534 0%, #00ff00 100%);
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+      transition: width 0.5s ease-in-out;
+    }
+
+    #leaderboard-container {
+      position: fixed;
+      top: 10px;
+      /* Restored to top now that authority bar is gone */
+      right: 10px;
+      z-index: 900;
+      background: rgba(25, 25, 25, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 0;
+      width: 90px;
+      height: 28px;
+      font-family: 'Verdana', sans-serif;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      transform-origin: top right;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow: hidden;
+      cursor: pointer;
+      pointer-events: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #leaderboard-container.expanded {
+      width: 160px;
+      height: auto;
+      padding: 8px;
     }
 
     #screen canvas {
@@ -65,6 +251,12 @@
       /* Hard Shadow */
       position: relative;
       animation: modalPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .banner-logo {
+      width: 180px;
+      margin-bottom: 20px;
+      filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.5));
     }
 
     .banner-content h1 {
@@ -634,6 +826,7 @@
 <body>
   <div id="banner-overlay">
     <div class="banner-content">
+      <img src="assets/flappylogo.png" class="banner-logo" alt="Flappy Pix Logo">
       <h1>SUA CONTA ESTÁ ATIVA!</h1>
       <p class="pixel-text">GANHE <span class="highlight">R$ 1,00</span> POR CADA SEGUNDO DE VOO</p>
       <div class="limit-badge">APENAS 5 TENTATIVAS RESTANTES</div>
@@ -666,7 +859,87 @@
   <div id="hype-container"></div>
   <div id="notification-container"></div>
   <div id="leaderboard-container"></div>
-  <div id="footer">© 2024 Flappy Pix - Todos os direitos reservados</div>
+  <div id="footer"></div>
+
+  <!-- TOP AUTHORITY BAR REMOVED -->
+
+  <!-- DISTRIBUTION PROGRESS (Bottom) -->
+  <div id="distribution-container">
+    <div class="dist-header">
+      <div class="dist-label">📊 META DE DISTRIBUIÇÃO DIÁRIA</div>
+      <div class="dist-value">R$ <span id="dist-val">94.210,35</span></div>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="dist-progress" style="width: 94%;"></div>
+    </div>
+  </div>
+
+  <!-- LIVE TICKER (LivePix Structure) -->
+  <div id="live-ticker">
+    <!-- JS will inject .livepix-card here -->
+  </div>
+
+  <script>
+    // --- DISTRIBUTION LOGIC ---
+    let distValue = 94210.35;
+    const distEl = document.getElementById('dist-val');
+    const distProgress = document.getElementById('dist-progress');
+    const dailyGoal = 100000.00; // Mock goal for the progress bar
+
+    setInterval(() => {
+      // Increment by small random amount (R$ 1 - R$ 15)
+      distValue += (Math.random() * 14) + 1;
+      distEl.innerText = distValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+      // Update progress bar
+      let progressPercent = (distValue / dailyGoal) * 100;
+      if (progressPercent > 100) progressPercent = 99.9; // Cap at near-full
+      distProgress.style.width = progressPercent + '%';
+    }, 4500);
+
+    // --- LIVEPIX LOGIC ---
+    const tickerContainer = document.getElementById('live-ticker');
+    const tickerNames = ["Felipe M.", "Lucas R.", "Ana K.", "João P.", "Mariana S.", "Roberto T.", "Giulia B.", "Pedro H.", "Camila L."];
+
+    const messages = [
+      "Joga muito!", "Saque instantâneo real!", "Obrigado Flappy Pix!", "Melhor jogo de faturamento", "Bati o recorde!", "PIX na mão!", "Vou recomendar pra todo mundo"
+    ];
+
+    function createLivePix(name, amount, action) {
+      const msg = messages[Math.floor(Math.random() * messages.length)];
+      return `
+            <div class="livepix-card">
+                <div class="livepix-side">
+                    <div class="livepix-logo">
+                        <img src="assets/flappylogo.png" alt="logo">
+                    </div>
+                </div>
+                <div class="livepix-body">
+                    <div class="livepix-header"><span>${name}</span> ${action} <span class="livepix-amount">R$ ${amount}</span></div>
+                    <div class="livepix-message">${msg}</div>
+                </div>
+            </div>
+        `;
+    }
+
+    function updateTicker() {
+      const name = tickerNames[Math.floor(Math.random() * tickerNames.length)];
+      const amount = (Math.random() * 80 + 20).toFixed(2).replace('.', ',');
+      const actions = ["sacou", "assinou PRO", "recebeu", "faturou"];
+      const action = actions[Math.floor(Math.random() * actions.length)];
+
+      tickerContainer.innerHTML = createLivePix(name, amount, action);
+
+      // Clear after 3.5s to wait for next one
+      setTimeout(() => {
+        tickerContainer.innerHTML = "";
+      }, 3500);
+    }
+
+    // Interval slightly larger than the timeout to allow gap
+    setInterval(updateTicker, 6000);
+    setTimeout(updateTicker, 1000);
+  </script>
 
   <!-- Withdrawal Form Modal -->
   <div id="withdrawal-modal">
