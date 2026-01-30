@@ -322,7 +322,10 @@ main = ->
     comboStacks.push game.time.now
     
     # Show Combo Text
-    comboVal = (1.0 + Math.floor(survivalTimer / 10) * 0.5 + comboStacks.length * 0.2).toFixed(1)
+    survivalBonus = Math.floor(survivalTimer / 5) * 1.0
+    currentMulti = 1.0 + survivalBonus + (comboStacks.length) * 0.5
+    if currentMulti > 4.0 then currentMulti = 4.0
+    comboVal = currentMulti.toFixed(1)
     
     comboFly = game.add.text(bird.x, bird.y - 20, "COMBO #{comboVal}x!",
       font: "10px 'Press Start 2P'"
@@ -539,7 +542,7 @@ main = ->
     saldoText.fixedToCamera = true
 
     # Multiplier Text HUD
-    multiText = game.add.text(10, 40, "MULT: 1.0x",
+    multiText = game.add.text(10, 40, "MULT: 1.0x (R$1.00/s)",
       font: "8px \"Press Start 2P\""
       fill: "#FFFFFF"
       stroke: "#000"
@@ -620,7 +623,7 @@ main = ->
     survivalTimer = 0
     comboStacks = []
     sessionEarnings = 0
-    if multiText then multiText.setText "MULT: 1.0x"
+    if multiText then multiText.setText "MULT: 1.0x (R$1.00/s)"
     if saldoText then saldoText.fill = "#00FF00"
     
     # Atualizar textos de pontos e saldo
@@ -676,19 +679,21 @@ main = ->
         dt = game.time.physicsElapsed
         survivalTimer += dt
         
-        # Clean up expired combos (3 seconds)
+        # Clean up expired combos (5 seconds)
         now = game.time.now
-        comboStacks = comboStacks.filter (time) -> now - time < 3000
+        comboStacks = comboStacks.filter (time) -> now - time < 5000
         
-        # Calculate Current Multiplier
-        survivalBonus = Math.floor(survivalTimer / 10) * 0.5
-        comboBonus = comboStacks.length * 0.2
+        # Calculate Current Multiplier (CAP 4.0x)
+        survivalBonus = Math.floor(survivalTimer / 5) * 1.0
+        comboBonus = comboStacks.length * 0.5
         multiplicador = 1.0 + survivalBonus + comboBonus
+        if multiplicador > 4.0 then multiplicador = 4.0
         
-        # Update Multiplier HUD
+        # Update Multiplier HUD with Earnings/sec info
         if multiText
-          multiText.setText "MULT: " + multiplicador.toFixed(1) + "x"
-          if multiplicador > 1.0
+           earningPerSec = (taxaPorSegundo * multiplicador).toFixed(2)
+           multiText.setText "MULT: " + multiplicador.toFixed(1) + "x (R$#{earningPerSec}/s)"
+           if multiplicador > 1.0
             multiText.fill = "#FFD700"
             # Pulse effect
             s = 1 + Math.sin(now / 150) * 0.1
@@ -701,9 +706,6 @@ main = ->
         gain = (taxaPorSegundo * multiplicador) * dt
         saldoAcumulado += gain
         sessionEarnings += gain
-        
-        if Math.random() < 0.01 # Log roughly once per second
-          console.log "DEBUG: taxa=#{taxaPorSegundo}, multi=#{multiplicador}, dt=#{dt}, gain=#{gain}, saldo=#{saldoAcumulado}"
         
         # Visual Frenzy State (2x+)
         if multiplicador >= 2.0
