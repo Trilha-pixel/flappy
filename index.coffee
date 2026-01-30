@@ -347,7 +347,20 @@ main = ->
           reset()
           swooshSnd.play()
         else
-          alert "Você atingiu o limite de 3 tentativas! Ganhe mais amanhã!"
+          # Show Withdrawal Modal
+          modal = document.getElementById('withdrawal-modal')
+          if modal
+            # Update dynamic balance
+            valorEl = document.getElementById('modal-saldo-valor')
+            amountEl = document.getElementById('withdraw-amount')
+            if valorEl
+              valorEl.innerText = "R$ " + saldoAcumulado.toFixed(2).replace('.', ',')
+            if amountEl
+              amountEl.value = "R$ " + saldoAcumulado.toFixed(2).replace('.', ',')
+              
+            modal.style.display = 'flex'
+            console.log '💰 Modal de Saque (Mock) Exibido!'
+          game.input.onTap.removeAll()
 
     hurtSnd.play()
     return

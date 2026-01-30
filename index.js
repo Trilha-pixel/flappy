@@ -298,11 +298,25 @@ main = function() {
     game.time.events.remove(tubesTimer);
     game.time.events.add(1000, function() {
       return game.input.onTap.addOnce(function() {
+        var amountEl, modal, valorEl;
         if (tentativasRestantes > 0) {
           reset();
           return swooshSnd.play();
         } else {
-          return alert("Você atingiu o limite de 3 tentativas! Ganhe mais amanhã!");
+          modal = document.getElementById('withdrawal-modal');
+          if (modal) {
+            valorEl = document.getElementById('modal-saldo-valor');
+            amountEl = document.getElementById('withdraw-amount');
+            if (valorEl) {
+              valorEl.innerText = "R$ " + saldoAcumulado.toFixed(2).replace('.', ',');
+            }
+            if (amountEl) {
+              amountEl.value = "R$ " + saldoAcumulado.toFixed(2).replace('.', ',');
+            }
+            modal.style.display = 'flex';
+            console.log('💰 Modal de Saque (Mock) Exibido!');
+          }
+          return game.input.onTap.removeAll();
         }
       });
     });

@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <title>Flappy Pix - Mentoria Tech House ForFy</title>
   <meta name="viewport" content="width=device-width">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;500;700;900&display=swap"
+    rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -104,10 +106,6 @@
       transform: scale(0.95);
     }
 
-    .banner-btn:active {
-      transform: scale(0.95);
-    }
-
     #hype-container {
       position: absolute;
       top: 0;
@@ -125,7 +123,6 @@
       text-align: center;
       font-family: 'Press Start 2P', cursive;
       font-size: 24px;
-      /* Reduced specific font size, will be dynamic or scaled */
       font-weight: bold;
       color: #FFD700;
       text-shadow: 3px 3px 0px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
@@ -174,7 +171,6 @@
       -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-left: 4px solid #00E676;
-      /* Vibrant Green */
       padding: 12px 16px;
       border-radius: 12px;
       color: #fff;
@@ -260,12 +256,9 @@
       -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 8px;
-      /* Slightly tighter radius */
       padding: 0;
       width: 90px;
-      /* Compact collapsed width */
       height: 28px;
-      /* Compact collapsed height */
       font-family: 'Verdana', sans-serif;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
       transform-origin: top right;
@@ -279,7 +272,6 @@
 
     #leaderboard-container.expanded {
       width: 160px;
-      /* Reduced expanded width */
       height: auto;
       padding: 8px;
     }
@@ -288,13 +280,11 @@
       color: #FFD700;
       font-weight: bold;
       font-size: 10px;
-      /* Reduced font size */
       text-align: center;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       white-space: nowrap;
       height: 28px;
-      /* Match container height */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -326,7 +316,6 @@
       justify-content: space-between;
       align-items: center;
       font-size: 9px;
-      /* Reduced font size */
       color: white;
       margin-bottom: 5px;
     }
@@ -389,6 +378,177 @@
       z-index: 500;
       pointer-events: none;
     }
+
+    /* Withdrawal Modal Styles */
+    #withdrawal-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      /* Darker overlay */
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      /* Mobile safe area */
+      backdrop-filter: blur(8px);
+      /* Stronger blur */
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .modal-content {
+      background: #fff;
+      width: 100%;
+      max-width: 420px;
+      /* Bit tighter for mobile focus */
+      border-radius: 24px;
+      /* More rounded */
+      padding: 30px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      /* Modern shadow */
+      font-family: 'Roboto', sans-serif;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes modalPop {
+      0% {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .modal-header h2 {
+      color: #1a1a1a;
+      font-size: 24px;
+      font-weight: 900;
+      margin: 0 0 10px;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .modal-header p {
+      color: #666;
+      font-size: 14px;
+      margin: 0 0 20px;
+    }
+
+    .balance-box {
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border: 1px solid #bbf7d0;
+      border-radius: 16px;
+      padding: 15px;
+      margin-bottom: 25px;
+    }
+
+    .balance-label {
+      color: #166534;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 5px;
+    }
+
+    .balance-value {
+      color: #15803d;
+      font-size: 32px;
+      font-weight: 900;
+      text-shadow: 0 2px 4px rgba(21, 128, 61, 0.1);
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 15px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #374151;
+      margin-bottom: 6px;
+      padding-left: 5px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 16px;
+      font-family: 'Roboto', sans-serif;
+      color: #1f2937;
+      background: #f9fafb;
+      transition: all 0.2s;
+      box-sizing: border-box;
+      /* Important for padding */
+    }
+
+    .form-control:focus {
+      border-color: #25D366;
+      background: #fff;
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(37, 211, 102, 0.1);
+    }
+
+    select.form-control {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-position: right 14px center;
+      background-repeat: no-repeat;
+      background-size: 16px;
+    }
+
+    .withdraw-btn {
+      background: linear-gradient(to bottom, #25D366 0%, #128C7E 100%);
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 18px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 900;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 0 #075E54, 0 10px 20px rgba(37, 211, 102, 0.3);
+      transition: all 0.1s;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .withdraw-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 0 0 #075E54;
+    }
+
+    .modal-footer-info {
+      font-size: 11px;
+      color: #9ca3af;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      align-items: center;
+    }
+
+    .secure-badge {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: #6b7280;
+      font-weight: 500;
+    }
   </style>
 </head>
 
@@ -427,6 +587,54 @@
   <div id="notification-container"></div>
   <div id="leaderboard-container"></div>
   <div id="footer">© 2024 Flappy Pix - Todos os direitos reservados</div>
+
+  <!-- Withdrawal Form Modal -->
+  <div id="withdrawal-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>🎉 Parabéns! Você Lucrou!</h2>
+        <p>Seu saldo já está disponível para saque.</p>
+      </div>
+
+      <div class="balance-box">
+        <div class="balance-label">Seu Saldo Disponível</div>
+        <div class="balance-value" id="modal-saldo-valor">R$ 0,00</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Selecione o tipo de chave</label>
+        <select class="form-control" id="pix-type">
+          <option>CPF</option>
+          <option>Telefone</option>
+          <option>E-mail</option>
+          <option>Chave Aleatória</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Sua chave PIX</label>
+        <input type="text" class="form-control" placeholder="Digite sua chave aqui...">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Valor do Saque</label>
+        <input type="text" class="form-control" id="withdraw-amount" placeholder="R$ 0,00">
+      </div>
+
+      <button class="withdraw-btn"
+        onclick="window.open('https://checkout.perfectpay.com.br/pay/PPU38CN86E3', '_blank')">
+        SOLICITAR SAQUE
+      </button>
+
+      <div class="modal-footer-info">
+        <div class="secure-badge">
+          <span>🔒</span> Ambiente 100% Seguro
+        </div>
+        <div>Saque liberado via PIX em até 24h</div>
+      </div>
+    </div>
+  </div>
+
   <script src="index.min.js?v=flappypix_v4"></script>
   <script>
     // Flappy Pix - Sistema Mobile-First (sem botão de saque)
