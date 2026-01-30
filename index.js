@@ -164,12 +164,28 @@ generateLeaderboard = function() {
     }
   };
   container.addEventListener("click", function() {
-    return container.classList.toggle("expanded");
+    container.classList.toggle("expanded");
+    updateHeader();
+    if (container.classList.contains("expanded")) {
+      return window.scheduleLeaderboardClose();
+    }
   });
+  window.scheduleLeaderboardClose = function() {
+    if (window.leaderboardTimer) {
+      clearTimeout(window.leaderboardTimer);
+    }
+    return window.leaderboardTimer = setTimeout(function() {
+      if (container.classList.contains("expanded")) {
+        container.classList.remove("expanded");
+        return updateHeader();
+      }
+    }, 5000);
+  };
   window.expandLeaderboard = function() {
     if (!container.classList.contains("expanded")) {
       container.classList.add("expanded");
-      return updateHeader();
+      updateHeader();
+      return window.scheduleLeaderboardClose();
     }
   };
   html = "<div class='leaderboard-header'>🏆 TOP 5</div>\n<div class='leaderboard-content'>";
