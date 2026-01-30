@@ -1027,7 +1027,7 @@
         <div class="goal-icon">
           <img src="assets/flappylogo.png" alt="icon">
         </div>
-        <div class="goal-text-left">Meta de Distribuição</div>
+        <div class="goal-text-left">RESERVA DIÁRIA DE SAQUES</div>
         <div class="goal-text-right">R$ <span id="dist-val">94.210</span> <span>/ R$ 100k</span></div>
       </div>
     </div>
@@ -1150,22 +1150,35 @@
     /* --- CONFETTI CSS --- */
     .confetti {
       position: absolute;
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       background-color: #f00;
-      animation: confetti-fall 3s linear forwards;
-      z-index: 2999;
-      /* Behind modal but above game */
+      top: -20px;
+      z-index: 3200;
+      /* Above all overlays */
+      opacity: 0;
     }
 
     @keyframes confetti-fall {
       0% {
-        transform: translateY(-10vh) rotate(0deg);
+        transform: translateY(0) rotate(0deg) translateX(0);
         opacity: 1;
       }
 
+      25% {
+        transform: translateY(25vh) rotate(90deg) translateX(20px);
+      }
+
+      50% {
+        transform: translateY(50vh) rotate(180deg) translateX(-20px);
+      }
+
+      75% {
+        transform: translateY(75vh) rotate(270deg) translateX(20px);
+      }
+
       100% {
-        transform: translateY(110vh) rotate(720deg);
+        transform: translateY(110vh) rotate(720deg) translateX(0);
         opacity: 0;
       }
     }

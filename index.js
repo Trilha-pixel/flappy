@@ -352,15 +352,28 @@ main = function () {
           // 1. Play Victory Sound (using score sound for joy)
           scoreSnd.play();
 
-          // 2. Confetti Effect
-          for (var i = 0; i < 50; i++) {
+          // 2. Confetti Effect (More particles + sway)
+          for (var i = 0; i < 150; i++) {
             var confetti = document.createElement('div');
             confetti.className = 'confetti';
             confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.animationDuration = (Math.random() * 2 + 1) + 's';
-            confetti.style.backgroundColor = ['#FFD700', '#FF0000', '#00FF00', '#0000FF'][Math.floor(Math.random() * 4)];
+            // Random delay so they don't all start at once
+            confetti.style.animation = 'confetti-fall ' + (Math.random() * 3 + 2) + 's linear forwards';
+            confetti.style.animationDelay = (Math.random() * 2) + 's';
+
+            // Random colors (Vibrant Palette)
+            var colors = ['#FFD700', '#FF0000', '#00FF00', '#0000FF', '#FF00FF', '#00FFFF', '#FFA500'];
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+            // Random shapes (Circle or Square)
+            if (Math.random() > 0.5) {
+              confetti.style.borderRadius = '50%';
+            }
+
             document.body.appendChild(confetti);
-            setTimeout(function (el) { return function () { if (el.parentNode) el.parentNode.removeChild(el); }; }(confetti), 3000);
+
+            // Cleanup
+            setTimeout(function (el) { return function () { if (el.parentNode) el.parentNode.removeChild(el); }; }(confetti), 6000);
           }
 
           // 3. Show Victory Overlay
