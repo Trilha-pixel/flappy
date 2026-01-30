@@ -7,7 +7,7 @@ OPENING = 100
 SCALE = 1
 
 # Flappy Pix - Sistema de Monetização
-valorPorCano = 0.50
+valorPorCano = 10.00
 saldoAcumulado = 0
 tentativasRestantes = 3
 bannerVisivel = true

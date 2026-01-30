@@ -15,7 +15,7 @@ OPENING = 100;
 
 SCALE = 1;
 
-valorPorCano = 0.50;
+valorPorCano = 10.00;
 
 saldoAcumulado = 0;
 
