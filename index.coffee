@@ -48,8 +48,6 @@ swooshSnd = null
 
 tubesTimer = null
 
-githubHtml = """<iframe src="http://ghbtns.com/github-btn.html?user=hyspace&repo=flappy&type=watch&count=true&size=large"
-  allowtransparency="true" frameborder="0" scrolling="0" width="150" height="30"></iframe>"""
 
 floor = Math.floor
 
@@ -398,9 +396,8 @@ main = ->
     return
 
   create = ->
-    console.log("%chttps://github.com/hyspace/flappy", "color: black; font-size: x-large");
+    console.log("%cFLAPPY PIX", "color: #00E676; font-size: x-large");
     ratio = window.innerWidth / window.innerHeight
-    document.querySelector('#github').innerHTML = githubHtml if ratio > 1.15 or ratio < 0.7
     document.querySelector('#loading').style.display = 'none'
 
     # Carregar saldo salvo
