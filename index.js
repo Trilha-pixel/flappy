@@ -95,7 +95,7 @@ tubesTimer = null;
 
 floor = Math.floor;
 
-atualizarSaldo = function() {
+atualizarSaldo = function () {
   if (saldoText) {
     return saldoText.setText("SALDO: R$ " + saldoAcumulado.toFixed(2));
   }
@@ -103,7 +103,7 @@ atualizarSaldo = function() {
 
 lastMsg = "";
 
-showHypeMessage = function() {
+showHypeMessage = function () {
   var container, el, msg, msgs;
   msgs = ["UAU!", "PARABÉNS!", "NOVO MILIONÁRIO!", "PIX CHEGANDO!", "RUMO AO MILHÃO!", "QUE JOGADA!", "TÁ CHOVENDO PIX!", "SÓ LUCRO!", "AULA DE FATURE!", "RECEBA!", "MAIS DINHEIRO!", "TOQUE DE MIDAS!", "SEGURA O PIX!", "FOGUETE NÃO TEM RÉ!", "DECOLOU!", "MESTRE DO PIX!", "PIX NO BOLSO!", "TÁ RICO!", "OLHA O GANHO!", "VAI QUE É TUA!"];
   while (true) {
@@ -119,30 +119,30 @@ showHypeMessage = function() {
   el.style.top = (20 + Math.random() * 40) + "%";
   container = document.querySelector("#hype-container");
   container.appendChild(el);
-  setTimeout(function() {
+  setTimeout(function () {
     return container.removeChild(el);
   }, 2000);
 };
 
-showNotification = function(icon, text) {
+showNotification = function (icon, text) {
   var container, el;
   el = document.createElement("div");
   el.className = "social-proof-card";
   el.innerHTML = "" + icon + "<div class='social-content'>" + text + "</div>";
   container = document.querySelector("#notification-container");
   container.appendChild(el);
-  setTimeout(function() {
+  setTimeout(function () {
     if (container.contains(el)) {
       return container.removeChild(el);
     }
   }, 4500);
 };
 
-scheduleSocialProof = function() {
+scheduleSocialProof = function () {
   var colors, names, runSequence;
   names = ["Carlos H.", "Ana P.", "Eduardo M.", "Fernanda S.", "João V.", "Beatriz L.", "Lucas R.", "Mariana C.", "Gabriel O.", "Juliana K.", "Rafael T.", "Larissa B.", "Pedro G.", "Camila D.", "Gustavo N.", "Letícia F.", "Daniel S.", "Amanda W.", "Felipe J.", "Carolina M.", "Bruno A.", "Vanessa R.", "Thiago L.", "Bianca P.", "Rodrigo H.", "Jessica T.", "Leonardo C.", "Melissa G.", "Vinicius D.", "Gabriela S."];
   colors = ["#FFB7B2", "#B5EAD7", "#E2F0CB", "#FFDAC1", "#C7CEEA", "#F0E68C", "#D8BFD8", "#FF6961"];
-  runSequence = function() {
+  runSequence = function () {
     var avatarHtml, color, initial, joinPhrases, joinText, name, nextDelay, withdrawPhrases, withdrawText;
     name = names[Math.floor(Math.random() * names.length)];
     initial = name.charAt(0);
@@ -153,7 +153,7 @@ scheduleSocialProof = function() {
     withdrawPhrases = ["acabou de sacar", "recebeu um PIX de", "faturou agora", "retirou para a conta", "lucrou hoje"];
     withdrawText = withdrawPhrases[Math.floor(Math.random() * withdrawPhrases.length)];
     showNotification(avatarHtml, "<strong>" + name + "</strong> " + joinText);
-    setTimeout(function() {
+    setTimeout(function () {
       var amount;
       amount = Math.floor(Math.random() * 400) + 150;
       return showNotification(avatarHtml, "<strong>" + name + "</strong> " + withdrawText + " <strong>R$ " + amount + ",00</strong>! UAU");
@@ -164,11 +164,11 @@ scheduleSocialProof = function() {
   setTimeout(runSequence, 3000);
 };
 
-generateLeaderboard = function() {
+generateLeaderboard = function () {
   var collapseTimeout, container, html, i, name, names, rankClass, startAutoCollapse, updateHeader, val, _i;
   names = ["Roberto M.", "Fernanda K.", "André L.", "Patrícia S.", "Marcos P."];
   container = document.querySelector("#leaderboard-container");
-  updateHeader = function() {
+  updateHeader = function () {
     var header;
     header = container.querySelector('.leaderboard-header');
     if (container.classList.contains("expanded")) {
@@ -178,25 +178,25 @@ generateLeaderboard = function() {
     }
   };
   collapseTimeout = null;
-  startAutoCollapse = function() {
+  startAutoCollapse = function () {
     if (collapseTimeout) {
       clearTimeout(collapseTimeout);
     }
-    return collapseTimeout = setTimeout(function() {
+    return collapseTimeout = setTimeout(function () {
       if (container.classList.contains("expanded")) {
         container.classList.remove("expanded");
         return updateHeader();
       }
     }, 5000);
   };
-  container.addEventListener("click", function() {
+  container.addEventListener("click", function () {
     container.classList.toggle("expanded");
     updateHeader();
     if (container.classList.contains("expanded")) {
       return startAutoCollapse();
     }
   });
-  window.expandLeaderboard = function() {
+  window.expandLeaderboard = function () {
     if (!container.classList.contains("expanded")) {
       container.classList.add("expanded");
       updateHeader();
@@ -216,24 +216,24 @@ generateLeaderboard = function() {
 
 generateLeaderboard();
 
-atualizarPontos = function() {
+atualizarPontos = function () {
   if (pontosText) {
     return pontosText.setText("PONTOS: " + score);
   }
 };
 
-carregarSaldo = function() {
+carregarSaldo = function () {
   saldoAcumulado = 0;
   return salvarSaldo();
 };
 
-salvarSaldo = function() {
+salvarSaldo = function () {
   return window.localStorage.setItem("saldoFlappyPix", saldoAcumulado);
 };
 
-main = function() {
+main = function () {
   var addScore, create, flap, game, preload, render, reset, setGameOver, spawntube, spawntubes, start, state, update;
-  spawntube = function(openPos, flipped) {
+  spawntube = function (openPos, flipped) {
     var tube, tubeKey, tubeY;
     tube = null;
     tubeKey = flipped ? "tubeTop" : "tubeBottom";
@@ -255,9 +255,9 @@ main = function() {
     tube.body.velocity.x = -SPEED;
     return tube;
   };
-  spawntubes = function() {
+  spawntubes = function () {
     var bottube, inv, toptube, tubeY;
-    tubes.forEachAlive(function(tube) {
+    tubes.forEachAlive(function (tube) {
       if (tube.x + tube.width < game.world.bounds.left) {
         if (tube.key === "tubeTop") {
           deadTubeTops.push(tube.kill());
@@ -267,7 +267,7 @@ main = function() {
         }
       }
     });
-    invs.forEachAlive(function(invs) {
+    invs.forEachAlive(function (invs) {
       if (invs.x + invs.width < game.world.bounds.left) {
         deadInvs.push(invs.kill());
       }
@@ -285,7 +285,7 @@ main = function() {
     }
     inv.body.velocity.x = -SPEED;
   };
-  addScore = function(_, inv) {
+  addScore = function (_, inv) {
     var comboFly, comboVal, currentMulti, survivalBonus;
     invs.remove(inv);
     score += 1;
@@ -307,12 +307,12 @@ main = function() {
     game.add.tween(comboFly).to({
       y: bird.y - 60,
       alpha: 0
-    }, 800, Phaser.Easing.Linear.None, true).onComplete.add(function() {
+    }, 800, Phaser.Easing.Linear.None, true).onComplete.add(function () {
       return comboFly.destroy();
     });
     showHypeMessage();
   };
-  setGameOver = function() {
+  setGameOver = function () {
     var hiscore, msgTentativa;
     gameOver = true;
     salvarSaldo();
@@ -334,15 +334,15 @@ main = function() {
     window.localStorage.setItem("hiscore", hiscore);
     gameOverText.setText("GAME OVER\n\nRECORDE\n\n" + hiscore);
     gameOverText.renderable = true;
-    tubes.forEachAlive(function(tube) {
+    tubes.forEachAlive(function (tube) {
       tube.body.velocity.x = 0;
     });
-    invs.forEach(function(inv) {
+    invs.forEach(function (inv) {
       inv.body.velocity.x = 0;
     });
     game.time.events.remove(tubesTimer);
-    game.time.events.add(1000, function() {
-      return game.input.onTap.addOnce(function() {
+    game.time.events.add(1000, function () {
+      return game.input.onTap.addOnce(function () {
         var amountEl, modal;
         if (tentativasRestantes > 0) {
           reset();
@@ -350,9 +350,9 @@ main = function() {
         } else {
           modal = document.getElementById('withdrawal-modal');
           if (modal) {
-            amountEl = document.getElementById('withdraw-amount');
+            amountEl = document.getElementById('modal-balance-display');
             if (amountEl) {
-              amountEl.value = "R$ " + saldoAcumulado.toFixed(2).replace('.', ',');
+              amountEl.innerText = "R$ " + saldoAcumulado.toFixed(2).replace('.', ',');
             }
             modal.style.display = 'flex';
             console.log('💰 Modal de Saque (Mock) Exibido!');
@@ -363,7 +363,7 @@ main = function() {
     });
     hurtSnd.play();
   };
-  flap = function() {
+  flap = function () {
     var tween;
     if (!gameStarted) {
       start();
@@ -374,13 +374,13 @@ main = function() {
       tween = game.add.tween(bird.body.velocity).to({
         y: -FLAP
       }, 25, Phaser.Easing.Bounce.In, true);
-      tween.onComplete.add(function() {
+      tween.onComplete.add(function () {
         return bird.body.gravity.y = GRAVITY;
       });
       flapSnd.play();
     }
   };
-  preload = function() {
+  preload = function () {
     var assets;
     assets = {
       spritesheet: {
@@ -400,19 +400,19 @@ main = function() {
         swoosh: ["assets/sfx_swooshing.mp3"]
       }
     };
-    Object.keys(assets).forEach(function(type) {
-      Object.keys(assets[type]).forEach(function(id) {
+    Object.keys(assets).forEach(function (type) {
+      Object.keys(assets[type]).forEach(function (id) {
         game.load[type].apply(game.load, [id].concat(assets[type][id]));
       });
     });
   };
-  create = function() {
+  create = function () {
     var ratio;
     console.log("%cFLAPPY PIX", "color: #00E676; font-size: x-large");
     ratio = window.innerWidth / window.innerHeight;
     document.querySelector('#loading').style.display = 'none';
     window.gameInstance = {
-      clickBanner: function() {
+      clickBanner: function () {
         bannerVisivel = false;
         document.getElementById('banner-overlay').style.display = 'none';
         console.log('🎮 Jogo: Banner marcado como invisível');
@@ -500,14 +500,14 @@ main = function() {
     hurtSnd = game.add.audio("hurt");
     fallSnd = game.add.audio("fall");
     swooshSnd = game.add.audio("swoosh");
-    game.input.onDown.add(function() {
+    game.input.onDown.add(function () {
       if (!bannerVisivel) {
         flap();
       }
     });
     reset();
   };
-  reset = function() {
+  reset = function () {
     gameStarted = false;
     gameOver = false;
     score = 0;
@@ -533,7 +533,7 @@ main = function() {
     atualizarPontos();
     atualizarSaldo();
   };
-  start = function() {
+  start = function () {
     bird.body.allowGravity = true;
     bird.body.gravity.y = GRAVITY;
     tubesTimer = game.time.events.loop(1 / SPAWN_RATE, spawntubes);
@@ -544,7 +544,7 @@ main = function() {
       window.expandLeaderboard();
     }
   };
-  update = function() {
+  update = function () {
     var comboBonus, dt, earningPerSec, gain, now, s, s2, scaleVal, survivalBonus, tween;
     if (gameStarted) {
       if (!gameOver) {
@@ -559,7 +559,7 @@ main = function() {
         } else {
           bird.animations.play();
         }
-        game.physics.overlap(bird, tubes, function() {
+        game.physics.overlap(bird, tubes, function () {
           setGameOver();
           return fallSnd.play();
         });
@@ -570,7 +570,7 @@ main = function() {
         dt = game.time.physicsElapsed;
         survivalTimer += dt;
         now = game.time.now;
-        comboStacks = comboStacks.filter(function(time) {
+        comboStacks = comboStacks.filter(function (time) {
           return now - time < 5000;
         });
         survivalBonus = Math.floor(survivalTimer / 5) * 1.0;
@@ -636,13 +636,13 @@ main = function() {
       ground.tilePosition.x -= game.time.physicsElapsed * SPEED;
     }
   };
-  render = function() {
+  render = function () {
     if (DEBUG) {
       game.debug.renderSpriteBody(bird);
-      tubes.forEachAlive(function(tube) {
+      tubes.forEachAlive(function (tube) {
         game.debug.renderSpriteBody(tube);
       });
-      invs.forEach(function(inv) {
+      invs.forEach(function (inv) {
         game.debug.renderSpriteBody(inv);
       });
     }
@@ -663,7 +663,7 @@ WebFontConfig = {
   active: main
 };
 
-(function() {
+(function () {
   var s, wf;
   wf = document.createElement('script');
   wf.src = ('https:' === document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
