@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ambiente Seguro - Flappy Pix</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <!-- Wistia Scripts -->
+    <script src="https://fast.wistia.com/player.js" async></script>
+    <script src="https://fast.wistia.com/embed/r1ryl1psxm.js" async type="module"></script>
+    <style>
+        /* Global Theme */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #87CEEB 0%, #FF8C00 100%);
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 480px;
+            /* Mobile focus */
+            background: rgba(255, 255, 255, 0.95);
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 40px;
+        }
+
+        /* Header Section */
+        .header {
+            background: white;
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .balance-card {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 1px solid #bbf7d0;
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .balance-title {
+            color: #166534;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .balance-amount {
+            color: #15803d;
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .status-alert {
+            margin-top: 15px;
+            background: #ecfccb;
+            color: #4d7c0f;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-block;
+            border: 1px solid #bef264;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 0 20px;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .headline {
+            color: #111;
+            font-size: 22px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin: 10px 0 5px;
+            line-height: 1.2;
+        }
+
+        .subheadline {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* Video Wrapper */
+        .video-wrapper {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 25px;
+            background: #000;
+        }
+
+        wistia-player[media-id='r1ryl1psxm']:not(:defined) {
+            background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/r1ryl1psxm/swatch');
+            display: block;
+            filter: blur(5px);
+            padding-top: 56.25%;
+        }
+
+        /* CTA Section */
+        .cta-btn {
+            background: linear-gradient(to bottom, #25D366 0%, #128C7E 100%);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #075E54, 0 15px 25px rgba(37, 211, 102, 0.4);
+            transition: all 0.1s;
+            font-family: 'Roboto', sans-serif;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            display: block;
+            box-sizing: border-box;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.02);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .cta-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #075E54;
+        }
+
+        .security-text {
+            color: #6b7280;
+            font-size: 12px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-weight: 500;
+        }
+
+        /* Benefits */
+        .benefits-grid {
+            display: grid;
+            gap: 10px;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .benefit-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            color: #334155;
+            font-weight: 500;
+        }
+
+        .check-circle {
+            background: #25D366;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            font-size: 10px;
+            color: #94a3b8;
+            text-align: center;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="balance-card">
+                <span class="balance-title">Seu Saldo Disponível</span>
+                <span class="balance-amount" id="display-balance">R$ 0,00</span>
+            </div>
+            <div>
+                <div class="status-alert">
+                    ✅ SALDO VERIFICADO E PRONTO PARA O SAQUE
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <h1 class="headline">LIBERAR SEU SAQUE</h1>
+            <p class="subheadline">Assista o vídeo completo para desbloquear</p>
+
+            <div class="video-wrapper">
+                <wistia-player media-id="r1ryl1psxm" aspect="1.7777777777777777"></wistia-player>
+            </div>
+
+            <a href="https://checkout.perfectpay.com.br/pay/PPU38CN86E3" class="cta-btn">
+                DESBLOQUEAR MEU SAQUE
+            </a>
+
+            <div class="security-text">
+                🔒 Ambiente 100% seguro e criptografado
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="check-circle">✔</div>
+                    <div>Saque liberado em até 24 horas via PIX</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="check-circle">✔</div>
+                    <div>Taxa devolvida junto com seu saque</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="check-circle">✔</div>
+                    <div>Acesso vitalício à plataforma</div>
+                </div>
+            </div>
+
+            <div class="footer">
+                © 2026 FlappyPix - Todos os direitos reservados<br>
+                Termos de Uso e Política de Privacidade
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load balance from localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedBalance = localStorage.getItem('flappy_pix_saldo_acumulado');
+            const balanceElement = document.getElementById('display-balance');
+
+            if (savedBalance) {
+                const balanceNum = parseFloat(savedBalance);
+                if (!isNaN(balanceNum)) {
+                    balanceElement.innerText = "R$ " + balanceNum.toFixed(2).replace('.', ',');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
