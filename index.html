@@ -924,6 +924,63 @@
       align-items: center;
       gap: 4px;
     }
+
+    /* Social Proof in Modal */
+    .social-proof-modal {
+      text-align: center;
+      margin: 15px 0 5px;
+    }
+
+    .social-proof-modal p {
+      color: #a1a1aa;
+      font-size: 13px;
+      margin-bottom: 12px;
+      margin-top: 0;
+    }
+
+    .social-proof-modal p strong {
+      color: #fff;
+    }
+
+    .avatars-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-left: 10px;
+      /* Offset for overlap compensation */
+    }
+
+    .avatars-row img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 3px solid #18181b;
+      /* Matches .glass-card background */
+      margin-left: -12px;
+      object-fit: cover;
+      position: relative;
+      z-index: 1;
+    }
+
+    .avatars-row img:first-child {
+      z-index: 5;
+    }
+
+    .avatars-row img:nth-child(2) {
+      z-index: 4;
+    }
+
+    .avatars-row img:nth-child(3) {
+      z-index: 3;
+    }
+
+    .avatars-row img:nth-child(4) {
+      z-index: 2;
+    }
+
+    .avatars-row img:nth-child(5) {
+      z-index: 1;
+    }
   </style>
 </head>
 
@@ -1097,6 +1154,16 @@
         <button id="btn-request-saque" class="primary-withdraw-btn">
           Solicitar Saque via PIX
         </button>
+        <div class="social-proof-modal">
+          <p>Junte-se a <strong>+14.000 jogadores</strong> de Flappy Pix</p>
+          <div class="avatars-row">
+            <img src="https://i.pravatar.cc/150?img=11" alt="Player">
+            <img src="https://i.pravatar.cc/150?img=32" alt="Player">
+            <img src="https://i.pravatar.cc/150?img=8" alt="Player">
+            <img src="https://i.pravatar.cc/150?img=5" alt="Player">
+            <img src="https://i.pravatar.cc/150?img=12" alt="Player">
+          </div>
+        </div>
 
         <div class="modal-footer">
           <div class="secure-line">
