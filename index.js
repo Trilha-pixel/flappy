@@ -291,19 +291,20 @@ main = function () {
     inv.body.velocity.x = -SPEED;
   };
   addScore = function (_, inv) {
-    var comboFly, comboVal, currentMulti, survivalBonus;
+    var comboFly, comboVal, currentMulti;
     invs.remove(inv);
     score += 1;
     scoreText.setText(score);
     scoreSnd.play();
-    comboStacks.push(game.time.now);
-    survivalBonus = Math.floor(survivalTimer / 5) * 1.0;
-    currentMulti = 1.0 + survivalBonus + comboStacks.length * 0.5;
-    if (currentMulti > 4.0) {
-      currentMulti = 4.0;
+
+    // Multiplier: 1.0 base + 1.0 per pipe (score), capped at 6.0x
+    currentMulti = 1.0 + parseFloat(score);
+    if (currentMulti > 6.0) {
+      currentMulti = 6.0;
     }
+
     comboVal = currentMulti.toFixed(1);
-    comboFly = game.add.text(bird.x, bird.y - 20, "COMBO " + comboVal + "x!", {
+    comboFly = game.add.text(bird.x, bird.y - 20, "MULT " + comboVal + "x!", {
       font: "10px 'Press Start 2P'",
       fill: "#FFD700",
       stroke: "#000",
