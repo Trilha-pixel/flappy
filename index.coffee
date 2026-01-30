@@ -188,13 +188,16 @@ generateLeaderboard = ->
   # Add toggle functionality
   container.addEventListener "click", ->
     container.classList.toggle("expanded")
-    updateHeader()
+  # Global function to expand leaderboard
+  window.expandLeaderboard = ->
+    if !container.classList.contains("expanded")
+      container.classList.add("expanded")
+      updateHeader()
   
-  # Start expanded then collapse
-  container.classList.add("expanded")
+  # Start collapsed (remove initial expanded class)
   
   html = """
-    <div class='leaderboard-header'>🏆 TOP 5 PIX DO DIA</div>
+    <div class='leaderboard-header'>🏆 TOP 5</div>
     <div class='leaderboard-content'>
   """
   
@@ -214,12 +217,6 @@ generateLeaderboard = ->
   html += "</div>"
     
   container.innerHTML = html
-  
-  # Auto collapse after 3s
-  setTimeout ->
-    container.classList.remove("expanded")
-    updateHeader()
-  , 3000
   
   return
 
@@ -590,6 +587,10 @@ main = ->
 
     # START!
     gameStarted = true
+    
+    # Expand Leaderboard when game starts
+    if typeof window.expandLeaderboard is 'function'
+      window.expandLeaderboard()
     return
 
   update = ->

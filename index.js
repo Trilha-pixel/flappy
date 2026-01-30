@@ -164,11 +164,15 @@ generateLeaderboard = function() {
     }
   };
   container.addEventListener("click", function() {
-    container.classList.toggle("expanded");
-    return updateHeader();
+    return container.classList.toggle("expanded");
   });
-  container.classList.add("expanded");
-  html = "<div class='leaderboard-header'>🏆 TOP 5 PIX DO DIA</div>\n<div class='leaderboard-content'>";
+  window.expandLeaderboard = function() {
+    if (!container.classList.contains("expanded")) {
+      container.classList.add("expanded");
+      return updateHeader();
+    }
+  };
+  html = "<div class='leaderboard-header'>🏆 TOP 5</div>\n<div class='leaderboard-content'>";
   for (i = _i = 0; _i <= 4; i = ++_i) {
     name = names[i];
     val = 5000 - (i * 800) + Math.floor(Math.random() * 500);
@@ -177,10 +181,6 @@ generateLeaderboard = function() {
   }
   html += "</div>";
   container.innerHTML = html;
-  setTimeout(function() {
-    container.classList.remove("expanded");
-    return updateHeader();
-  }, 3000);
 };
 
 generateLeaderboard();
@@ -472,6 +472,9 @@ main = function() {
     scoreText.setText(score);
     instText.renderable = false;
     gameStarted = true;
+    if (typeof window.expandLeaderboard === 'function') {
+      window.expandLeaderboard();
+    }
   };
   update = function() {
     var tween;
