@@ -104,6 +104,60 @@ showHypeMessage = ->
   , 2000
   return
 
+# Social Proof Logic
+showNotification = (icon, text) ->
+  el = document.createElement("div")
+  el.className = "social-proof-card"
+  el.innerHTML = "#{icon}<div class='social-content'>#{text}</div>"
+  
+  container = document.querySelector("#notification-container")
+  container.appendChild(el)
+  
+  setTimeout ->
+    if container.contains(el)
+      container.removeChild(el)
+  , 4500
+  return
+
+scheduleSocialProof = ->
+  names = [
+    "Carlos H.", "Ana P.", "Eduardo M.", "Fernanda S.", "João V.", "Beatriz L.",
+    "Lucas R.", "Mariana C.", "Gabriel O.", "Juliana K.", "Rafael T.", "Larissa B.",
+    "Pedro G.", "Camila D.", "Gustavo N.", "Letícia F.", "Daniel S.", "Amanda W.",
+    "Felipe J.", "Carolina M.", "Bruno A.", "Vanessa R.", "Thiago L.", "Bianca P.",
+    "Rodrigo H.", "Jessica T.", "Leonardo C.", "Melissa G.", "Vinicius D.", "Gabriela S."
+  ]
+  
+  # Pastel colors for avatars
+  colors = ["#FFB7B2", "#B5EAD7", "#E2F0CB", "#FFDAC1", "#C7CEEA", "#F0E68C", "#D8BFD8", "#FF6961"]
+
+  runSequence = ->
+    name = names[Math.floor(Math.random() * names.length)]
+    initial = name.charAt(0)
+    color = colors[Math.floor(Math.random() * colors.length)]
+    
+    avatarHtml = "<div class='social-avatar' style='background-color: #{color}; color: #333'>#{initial}</div>"
+    
+    # Step 1: Join PRO
+    showNotification avatarHtml, "<strong>#{name}</strong> entrou para o plano <span class='pro-badge'>PRO</span>"
+    
+    # Step 2: Withdraw (after 2s)
+    setTimeout ->
+      amount = (Math.floor(Math.random() * 400) + 150) 
+      showNotification avatarHtml, "<strong>#{name}</strong> acabou de sacar <strong>R$ #{amount},00</strong>! UAU"
+    , 2000
+    
+    # Schedule next sequence
+    nextDelay = Math.random() * 8000 + 5000 # 5-13 seconds
+    setTimeout runSequence, nextDelay
+    return
+
+  # Start the loop
+  setTimeout runSequence, 3000
+  return
+
+scheduleSocialProof()
+
 atualizarPontos = ->
   if pontosText
     pontosText.setText "PONTOS: " + score
