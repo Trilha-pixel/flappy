@@ -11,10 +11,12 @@ SCALE = 1
 valorPorCano = 10.00 # Legacy fallback
 saldoAcumulado = 0
 taxaPorSegundo = 1.00
-multiplicador = 1
-multiplierTimer = 0
+multiplicador = 1.0
+survivalTimer = 0
+comboStacks = []
 sessionEarnings = 0
 floatingText = null
+multiText = null
 tentativasRestantes = 5
 bannerVisivel = true
 
@@ -316,20 +318,20 @@ main = ->
     scoreText.setText score
     scoreSnd.play()
     
-    # Trigger Multiplier (x2 for 2 seconds)
-    multiplicador = 2
-    multiplierTimer = 2.0 # seconds
+    # Combo Trigger
+    comboStacks.push game.time.now
     
-    # Visual Feedback
-    if saldoText
-      saldoText.fill = "#FFD700" # GOLD
-      saldoText.fontSize = "10px" # Pulse up
-      game.time.events.add 200, -> saldoText.fontSize = "8px"
-      
-    # Tint tubes for glow effect
-    tubes.forEachAlive (tube) ->
-      tube.tint = 0xFFD700
-      
+    # Show Combo Text
+    comboVal = (1.0 + Math.floor(survivalTimer / 10) * 0.5 + comboStacks.length * 0.2).toFixed(1)
+    
+    comboFly = game.add.text(bird.x, bird.y - 20, "COMBO #{comboVal}x!",
+      font: "10px 'Press Start 2P'"
+      fill: "#FFD700"
+      stroke: "#000"
+      strokeThickness: 3
+    )
+    game.add.tween(comboFly).to({ y: bird.y - 60, alpha: 0 }, 800, Phaser.Easing.Linear.None, true).onComplete.add -> comboFly.destroy()
+    
     showHypeMessage()
     return
 
@@ -535,6 +537,15 @@ main = ->
       align: "left"
     )
     saldoText.fixedToCamera = true
+
+    # Multiplier Text HUD
+    multiText = game.add.text(10, 40, "MULT: 1.0x",
+      font: "8px \"Press Start 2P\""
+      fill: "#FFFFFF"
+      stroke: "#000"
+      strokeThickness: 2
+    )
+    multiText.fixedToCamera = true
     
     # Atualizar saldo inicial
     atualizarSaldo()
@@ -604,6 +615,14 @@ main = ->
     tubes.removeAll()
     invs.removeAll()
     
+    # Reset Multiplier
+    multiplicador = 1.0
+    survivalTimer = 0
+    comboStacks = []
+    sessionEarnings = 0
+    if multiText then multiText.setText "MULT: 1.0x"
+    if saldoText then saldoText.fill = "#00FF00"
+    
     # Atualizar textos de pontos e saldo
     atualizarPontos()
     atualizarSaldo()
@@ -653,27 +672,51 @@ main = ->
         # Add score
         game.physics.overlap bird, invs, addScore
         
-        # --- MONETIZATION UPDATE LOOP ---
-        # Earn money based on time alive
+        # --- PROGRESSIVE MULTIPLIER LOGIC ---
         dt = game.time.physicsElapsed
+        survivalTimer += dt
+        
+        # Clean up expired combos (3 seconds)
+        now = game.time.now
+        comboStacks = comboStacks.filter (time) -> now - time < 3000
+        
+        # Calculate Current Multiplier
+        survivalBonus = Math.floor(survivalTimer / 10) * 0.5
+        comboBonus = comboStacks.length * 0.2
+        multiplicador = 1.0 + survivalBonus + comboBonus
+        
+        # Update Multiplier HUD
+        if multiText
+          multiText.setText "MULT: " + multiplicador.toFixed(1) + "x"
+          if multiplicador > 1.0
+            multiText.fill = "#FFD700"
+            # Pulse effect
+            s = 1 + Math.sin(now / 150) * 0.1
+            multiText.scale.setTo s, s
+          else
+            multiText.fill = "#FFFFFF"
+            multiText.scale.setTo 1, 1
+
+        # Calculate Final Earnings
         gain = (taxaPorSegundo * multiplicador) * dt
         saldoAcumulado += gain
         sessionEarnings += gain
         
-        # Update Balance Text every frame
+        # Visual Frenzy State (2x+)
+        if multiplicador >= 2.0
+          if saldoText
+            saldoText.fill = "#FFD700" # GOLD
+            # Pulse saldo text
+            s2 = 1 + Math.sin(now / 100) * 0.1
+            saldoText.scale.setTo s2, s2
+        else
+          if saldoText
+            saldoText.fill = "#00FF00"
+            saldoText.scale.setTo 1, 1
+
+        # Update Balance Text
         if saldoText
           saldoText.setText "SALDO: R$ " + saldoAcumulado.toFixed(2)
-          
-        # Handle Multiplier Timer
-        if multiplierTimer > 0
-          multiplierTimer -= dt
-          if multiplierTimer <= 0
-            multiplicador = 1
-            # Reset Visuals
-            if saldoText
-               saldoText.fill = "#00FF00" # Back to Green
-            tubes.forEachAlive (tube) ->
-              tube.tint = 0xFFFFFF # Remove tint
               
         # Update Floating Text
         if floatingText
