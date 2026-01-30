@@ -153,17 +153,36 @@ scheduleSocialProof = function() {
 };
 
 generateLeaderboard = function() {
-  var container, html, i, name, names, rankClass, val, _i;
+  var container, html, i, name, names, rankClass, updateHeader, val, _i;
   names = ["Roberto M.", "Fernanda K.", "André L.", "Patrícia S.", "Marcos P."];
   container = document.querySelector("#leaderboard-container");
-  html = "<div class='leaderboard-header'>🏆 TOP 5 DO DIA</div>";
+  updateHeader = function() {
+    var header;
+    header = container.querySelector('.leaderboard-header');
+    if (container.classList.contains("expanded")) {
+      return header.innerText = "🏆 TOP 5 PIX DO DIA";
+    } else {
+      return header.innerText = "🏆 TOP 5";
+    }
+  };
+  container.addEventListener("click", function() {
+    container.classList.toggle("expanded");
+    return updateHeader();
+  });
+  container.classList.add("expanded");
+  html = "<div class='leaderboard-header'>🏆 TOP 5 PIX DO DIA</div>\n<div class='leaderboard-content'>";
   for (i = _i = 0; _i <= 4; i = ++_i) {
     name = names[i];
     val = 5000 - (i * 800) + Math.floor(Math.random() * 500);
     rankClass = "r-" + (i + 1);
     html += "<div class='leaderboard-item'>\n  <div class='rank " + rankClass + "'>" + (i + 1) + "</div>\n  <div class='player-name'>" + name + "</div>\n  <div class='player-value'>R$ " + val + ",00</div>\n</div>";
   }
+  html += "</div>";
   container.innerHTML = html;
+  setTimeout(function() {
+    container.classList.remove("expanded");
+    return updateHeader();
+  }, 3000);
 };
 
 generateLeaderboard();

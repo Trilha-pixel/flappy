@@ -180,7 +180,25 @@ generateLeaderboard = ->
   names = ["Roberto M.", "Fernanda K.", "André L.", "Patrícia S.", "Marcos P."]
   container = document.querySelector("#leaderboard-container")
   
-  html = "<div class='leaderboard-header'>🏆 TOP 5 DO DIA</div>"
+  updateHeader = ->
+    header = container.querySelector('.leaderboard-header')
+    if container.classList.contains("expanded")
+      header.innerText = "🏆 TOP 5 PIX DO DIA"
+    else
+      header.innerText = "🏆 TOP 5"
+  
+  # Add toggle functionality
+  container.addEventListener "click", ->
+    container.classList.toggle("expanded")
+    updateHeader()
+  
+  # Start expanded then collapse
+  container.classList.add("expanded")
+  
+  html = """
+    <div class='leaderboard-header'>🏆 TOP 5 PIX DO DIA</div>
+    <div class='leaderboard-content'>
+  """
   
   for i in [0..4]
     name = names[i]
@@ -195,7 +213,16 @@ generateLeaderboard = ->
       </div>
     """
     
+  html += "</div>"
+    
   container.innerHTML = html
+  
+  # Auto collapse after 3s
+  setTimeout ->
+    container.classList.remove("expanded")
+    updateHeader()
+  , 3000
+  
   return
 
 generateLeaderboard()
