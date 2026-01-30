@@ -735,7 +735,7 @@
       pointer-events: none;
     }
 
-    /* Withdrawal Modal Styles */
+    /* --- STUNNING MODERN MODAL (GLASSMORPHISM) --- */
     #withdrawal-modal {
       display: none;
       position: fixed;
@@ -743,188 +743,199 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.85);
-      /* Darker overlay */
+      background: rgba(18, 18, 18, 0.8);
       z-index: 3000;
-      /* High priority */
-      display: none;
-      /* Controlled by JS, but will use flex when shown */
       justify-content: center;
       align-items: center;
-      backdrop-filter: blur(8px);
-      /* Stronger blur */
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    .modal-content {
-      background: #fff;
-      width: 90%;
-      /* Better for very small screens */
-      max-width: 380px;
-      max-height: 85vh;
-      /* Prevent overflow on small mobiles */
-      overflow-y: auto;
-      /* Scroll if content is too long */
-      border-radius: 28px;
-      padding: 24px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-      font-family: 'Roboto', sans-serif;
-      text-align: center;
-      position: relative;
-      /* Centering fallback */
-      animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-family: 'Inter', 'Roboto', sans-serif;
+      padding: 20px;
       box-sizing: border-box;
     }
 
-    @keyframes modalPop {
-      0% {
-        transform: scale(0.8);
-        opacity: 0;
-      }
-
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
+    .glass-card {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 380px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: modalPop 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      color: #fff;
     }
 
-    .modal-header h2 {
-      color: #1a1a1a;
-      font-size: 20px;
-      font-weight: 900;
-      margin: 10px 0 5px;
-      text-transform: uppercase;
-      line-height: 1.2;
+    .glass-logo {
+      width: 64px;
+      height: 64px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .glass-logo img {
+      width: 70%;
+      height: 70%;
+      object-fit: contain;
+    }
+
+    .glass-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      text-align: center;
+      background: linear-gradient(to bottom, #fff, #aaa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .glass-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .glass-input-group {
+      display: flex;
+      flex-direction: column;
       gap: 8px;
     }
 
-    .modal-header p {
-      color: #666;
-      font-size: 13px;
-      /* Slightly smaller */
-      margin: 0 0 12px;
-      /* Tighter */
-    }
-
-    .balance-box {
-      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-      border: 1px solid #bbf7d0;
-      border-radius: 16px;
-      padding: 10px 15px;
-      /* Tighter padding */
-      margin-bottom: 15px;
-      /* Reduced margin */
-    }
-
-    .balance-label {
-      color: #166534;
+    .glass-label {
       font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 5px;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 500;
+      padding-left: 4px;
     }
 
-    .balance-value {
-      color: #15803d;
-      font-size: 28px;
-      /* Slightly smaller to fit better */
-      font-weight: 900;
-      text-shadow: 0 2px 4px rgba(21, 128, 61, 0.1);
-    }
-
-    .form-group {
-      text-align: left;
-      margin-bottom: 10px;
-      /* Tighter */
-    }
-
-    .form-label {
-      display: block;
-      font-size: 11px;
-      /* Smaller */
-      font-weight: 700;
-      color: #374151;
-      margin-bottom: 4px;
-      /* Tighter */
-      padding-left: 5px;
-    }
-
-    .form-control {
+    .glass-input {
       width: 100%;
-      padding: 16px;
-      /* Larger tap area */
-      border: 2px solid #e5e7eb;
-      border-radius: 12px;
-      font-size: 16px;
-      /* Prevents iOS zoom */
-      font-family: 'Roboto', sans-serif;
-      color: #1f2937;
-      background: #f9fafb;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 14px 20px;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
       transition: all 0.2s;
       box-sizing: border-box;
-      /* Important for padding */
     }
 
-    .form-control:focus {
-      border-color: #25D366;
-      background: #fff;
-      outline: none;
-      box-shadow: 0 0 0 4px rgba(37, 211, 102, 0.1);
+    .glass-input:focus {
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05);
     }
 
-    select.form-control {
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-      background-position: right 14px center;
-      background-repeat: no-repeat;
-      background-size: 16px;
-    }
-
-    .withdraw-btn {
-      background: linear-gradient(to bottom, #25D366 0%, #128C7E 100%);
-      color: white;
-      border: none;
+    .glass-btn-primary {
       width: 100%;
-      padding: 15px;
-      /* Tighter */
-      border-radius: 12px;
-      font-size: 18px;
-      font-weight: 900;
-      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-weight: 600;
+      padding: 14px;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       cursor: pointer;
-      box-shadow: 0 4px 0 #075E54, 0 10px 20px rgba(37, 211, 102, 0.3);
-      transition: all 0.1s;
-      margin-top: 5px;
-      /* Tighter */
-      margin-bottom: 15px;
-      /* Tighter */
-      font-family: 'Roboto', sans-serif;
+      transition: all 0.2s;
+      font-size: 15px;
+      margin-top: 8px;
     }
 
-    .withdraw-btn:active {
-      transform: translateY(4px);
-      box-shadow: 0 0 0 #075E54;
+    .glass-btn-primary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-1px);
     }
 
-    .modal-footer-info {
+    .glass-btn-secondary {
+      width: 100%;
+      background: linear-gradient(180deg, #232526 0%, #2d2e30 100%);
+      color: #fff;
+      font-weight: 600;
+      padding: 14px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 14px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .glass-footer {
+      margin-top: 24px;
+      text-align: center;
+    }
+
+    .glass-footer-text {
       font-size: 11px;
-      color: #9ca3af;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .glass-footer-link {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* Social Proof Section */
+    .glass-social {
+      margin-top: 40px;
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .social-count {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .social-count span {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .social-avatars {
+      display: flex;
       align-items: center;
     }
 
-    .secure-badge {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      color: #6b7280;
-      font-weight: 500;
+    .social-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid #121212;
+      margin-left: -8px;
+      background: #333;
+      overflow: hidden;
+    }
+
+    .social-avatar:first-child {
+      margin-left: 0;
+    }
+
+    .social-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   </style>
 </head>
@@ -959,15 +970,10 @@
   </script>
   <div id="loading">Carregando Flappy Pix...</div>
   <div id="screen"></div>
-  <div id="screen"></div>
-  <div id="hype-container"></div>
-  <div id="screen"></div>
   <div id="hype-container"></div>
   <div id="notification-container"></div>
   <div id="leaderboard-container"></div>
   <div id="footer"></div>
-
-  <!-- TOP AUTHORITY BAR REMOVED -->
 
   <!-- DISTRIBUTION PROGRESS (Twitch Style) -->
   <div id="distribution-container">
@@ -1002,15 +1008,13 @@
     ];
 
     function updateProgressBar(amountToAdd) {
+      if (!distEl || !distProgress) return;
       distValue += amountToAdd;
       distEl.innerText = Math.floor(distValue).toLocaleString('pt-BR');
-
-      // Trigger Flash feedback
       distEl.parentElement.classList.remove('value-flash');
-      void distEl.offsetWidth; // Trigger reflow
+      void distEl.offsetWidth;
       distEl.parentElement.classList.add('value-flash');
 
-      // Update progress bar width
       let progressPercent = (distValue / dailyGoal) * 100;
       if (progressPercent > 100) progressPercent = 99.9;
       distProgress.style.width = progressPercent + '%';
@@ -1034,99 +1038,80 @@
     }
 
     function updateTicker() {
+      if (!tickerContainer) return;
       const name = tickerNames[Math.floor(Math.random() * tickerNames.length)];
-      const amountNum = (Math.random() * 80 + 20); // Amount to add to distribution
+      const amountNum = (Math.random() * 80 + 20);
       const amountStr = amountNum.toFixed(2).replace('.', ',');
-
       const actions = ["sacou", "recebeu", "faturou", "resgatou"];
       const action = actions[Math.floor(Math.random() * actions.length)];
-
-      // 1. Show the LivePix notification
       tickerContainer.innerHTML = createLivePix(name, amountStr, action);
-
-      // 2. IMMEDIATELY Sync the progress bar with this amount
       updateProgressBar(amountNum);
-
-      // Clear notification after 4s
       setTimeout(() => {
         tickerContainer.innerHTML = "";
       }, 4000);
     }
 
-    // Update ticker every 6.5 seconds
     setInterval(updateTicker, 6500);
-    // Initial update after 1.5s
     setTimeout(updateTicker, 1500);
   </script>
 
-  <!-- Withdrawal Form Modal -->
+  <!-- WITHDRAWAL MODAL (Stunning Design) -->
   <div id="withdrawal-modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2><span>🎉</span> PARABÉNS! VOCÊ LUCROU!</h2>
-        <p>Seu saldo já está disponível para saque.</p>
+    <div class="glass-card">
+      <div class="glass-logo">
+        <img src="assets/flappylogo.png" alt="logo">
       </div>
-
-      <div class="balance-box">
-        <div class="balance-label">Seu Saldo Disponível</div>
-        <div class="balance-value" id="modal-saldo-valor">R$ 0,00</div>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Selecione o tipo de chave</label>
-        <select class="form-control" id="pix-type">
-          <option>CPF</option>
-          <option>Telefone</option>
-          <option>E-mail</option>
-          <option>Chave Aleatória</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Sua chave PIX</label>
-        <input type="text" class="form-control" placeholder="Digite sua chave aqui...">
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Valor do Saque</label>
-        <input type="text" class="form-control" id="withdraw-amount" placeholder="R$ 0,00">
-      </div>
-
-      <button class="withdraw-btn" id="withdraw-btn" onclick="processWithdrawal()">
-        SOLICITAR SAQUE
-      </button>
-
-      <script>
-        function processWithdrawal() {
-          const btn = document.getElementById('withdraw-btn');
-
-          // 1. Loading State
-          btn.innerText = "↻ PROCESSANDO...";
-          btn.style.opacity = "0.8";
-          btn.style.cursor = "wait";
-          btn.disabled = true;
-
-          // 2. Simulate Server Check (1.5s)
-          setTimeout(() => {
-            // 3. Success & Redirect
-            btn.innerText = "✔ APROVADO!";
-            btn.style.background = "linear-gradient(to bottom, #10B981 0%, #059669 100%)"; // Success Green
-
-            setTimeout(() => {
-              window.location.href = 'ambienteseguro.html';
-            }, 500); // Short delay to see "Approved"
-
-          }, 1500);
-        }
-      </script>
-
-      <div class="modal-footer-info">
-        <div class="secure-badge">
-          <span>🔒</span> Ambiente 100% Seguro
+      <h2 class="glass-title">Flappy Pix Saque</h2>
+      <div class="glass-form">
+        <div class="glass-input-group">
+          <label class="glass-label">Chave PIX (CPF, Email ou Telefone)</label>
+          <input type="text" id="pix-key-input" placeholder="Digite sua chave aqui..." class="glass-input">
         </div>
-        <div>Saque liberado via PIX em até 24h</div>
+        <div class="glass-input-group">
+          <label class="glass-label">Valor Disponível</label>
+          <input type="text" id="withdraw-amount" readonly class="glass-input" value="R$ 0,00">
+        </div>
+        <hr style="opacity: 0.1; margin: 8px 0;">
+        <div>
+          <button id="btn-request-saque" class="glass-btn-primary">Solicitar Saque via PIX</button>
+          <button style="margin-top: 12px;" class="glass-btn-secondary">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" style="width: 18px;">
+            Acessar com Google
+          </button>
+          <div class="glass-footer">
+            <span class="glass-footer-text">
+              Ambiente 100% Seguro. <br>
+              <span class="glass-footer-link">Ver termos de faturamento</span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="glass-social">
+        <p class="social-count">Junte-se a <span>+14.000</span> jogadores ativos</p>
+        <div class="social-avatars">
+          <div class="social-avatar"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="u"></div>
+          <div class="social-avatar"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="u"></div>
+          <div class="social-avatar"><img src="https://randomuser.me/api/portraits/men/54.jpg" alt="u"></div>
+          <div class="social-avatar"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="u"></div>
+        </div>
       </div>
     </div>
+  </div>
+
+  <script>
+    const btnWithdraw = document.getElementById('btn-request-saque');
+    if (btnWithdraw) {
+      btnWithdraw.onclick = () => {
+        btnWithdraw.innerText = "Processando...";
+        btnWithdraw.disabled = true;
+        btnWithdraw.style.opacity = "0.5";
+        setTimeout(() => {
+          window.location.href = "ambienteseguro.html";
+        }, 1500);
+      };
+    }
+  </script>
+  </div>
   </div>
 
   <script src="index.min.js?v=flappypix_v4"></script>

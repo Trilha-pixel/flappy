@@ -383,10 +383,7 @@ main = ->
           modal = document.getElementById('withdrawal-modal')
           if modal
             # Update dynamic balance
-            valorEl = document.getElementById('modal-saldo-valor')
             amountEl = document.getElementById('withdraw-amount')
-            if valorEl
-              valorEl.innerText = "R$ " + saldoAcumulado.toFixed(2).replace('.', ',')
             if amountEl
               amountEl.value = "R$ " + saldoAcumulado.toFixed(2).replace('.', ',')
               
