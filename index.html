@@ -607,18 +607,16 @@
       top: 10px;
       right: 10px;
       z-index: 900;
-      background: rgba(25, 25, 25, 0.95);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
+      background: #18181b;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
       padding: 0;
-      width: 90px;
-      height: 28px;
-      font-family: 'Verdana', sans-serif;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      width: 80px;
+      height: 26px;
+      font-family: 'Inter', system-ui, sans-serif;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
       transform-origin: top right;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: all 0.3s ease;
       overflow: hidden;
       cursor: pointer;
       pointer-events: auto;
@@ -627,53 +625,50 @@
     }
 
     #leaderboard-container.expanded {
-      width: 160px;
+      width: 130px;
       height: auto;
-      padding: 8px;
+      padding: 10px;
     }
 
     .leaderboard-header {
-      color: #FFD700;
-      font-weight: bold;
-      font-size: 10px;
+      color: #71717a;
+      font-weight: 700;
+      font-size: 9px;
       text-align: center;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.4px;
       white-space: nowrap;
-      height: 28px;
+      height: 26px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s;
     }
 
     #leaderboard-container.expanded .leaderboard-header {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      margin-bottom: 6px;
+      color: #fff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      margin-bottom: 8px;
+      padding-bottom: 6px;
       height: auto;
-      padding-bottom: 4px;
     }
 
     .leaderboard-content {
       opacity: 0;
-      transition: opacity 0.3s;
-      pointer-events: none;
+      transition: opacity 0.2s;
     }
 
     #leaderboard-container.expanded .leaderboard-content {
       opacity: 1;
-      pointer-events: auto;
     }
 
     .leaderboard-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 9px;
-      color: white;
-      margin-bottom: 5px;
+      font-size: 8px;
+      color: #d1d1d6;
+      margin-bottom: 6px;
     }
 
     .leaderboard-item:last-child {
@@ -681,33 +676,22 @@
     }
 
     .rank {
-      width: 16px;
-      height: 16px;
-      background: #333;
+      width: 14px;
+      height: 14px;
+      background: #27272a;
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-weight: bold;
+      font-weight: 700;
       color: #fff;
-      margin-right: 5px;
-      font-size: 9px;
+      margin-right: 6px;
+      font-size: 8px;
     }
 
     .rank.r-1 {
-      background: #FFD700;
-      color: black;
-      box-shadow: 0 0 5px #FFD700;
-    }
-
-    .rank.r-2 {
-      background: #C0C0C0;
-      color: black;
-    }
-
-    .rank.r-3 {
-      background: #CD7F32;
-      color: black;
+      background: #fff;
+      color: #000;
     }
 
     .player-name {
@@ -715,12 +699,12 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      margin-right: 5px;
+      margin-right: 4px;
     }
 
     .player-value {
-      color: #00E676;
-      font-weight: bold;
+      color: #f4f4f5;
+      font-weight: 700;
     }
 
     #footer {
@@ -735,7 +719,7 @@
       pointer-events: none;
     }
 
-    /* --- ULTRA-PREMIUM MODAL (EMERALD GLASS) --- */
+    /* --- MINIMALIST DARK MODAL (HEXTA STYLE) --- */
     #withdrawal-modal {
       display: none;
       position: fixed;
@@ -743,166 +727,137 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(6, 18, 15, 0.9);
-      /* Deep emerald dark */
+      background: rgba(0, 0, 0, 0.85);
       z-index: 3000;
       justify-content: center;
       align-items: center;
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      font-family: 'Inter', 'Roboto', sans-serif;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-family: 'Inter', system-ui, sans-serif;
       padding: 20px;
       box-sizing: border-box;
     }
 
     .glass-card {
       position: relative;
-      z-index: 10;
       width: 100%;
       max-width: 360px;
-      border-radius: 28px;
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
+      border-radius: 20px;
+      background: #18181b;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), inset 0 0 40px rgba(255, 255, 255, 0.02);
       padding: 32px 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      animation: modalPop 0.5s cubic-bezier(0.16, 1, 0.3, 1);
       color: #fff;
-    }
-
-    /* Emerald Border Glow */
-    .glass-card::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: -1;
-      border-radius: inherit;
-      box-shadow: inset 0 0 20px rgba(0, 255, 128, 0.1);
-      pointer-events: none;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      animation: modalPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .pix-seal {
       display: flex;
       align-items: center;
       gap: 6px;
-      background: rgba(0, 255, 128, 0.1);
-      padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 6px 12px;
       border-radius: 100px;
-      margin-bottom: 24px;
-      border: 1px solid rgba(0, 255, 128, 0.2);
+      margin-bottom: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .pix-seal-icon {
-      width: 16px;
-      height: 16px;
-      fill: #00ff88;
+      width: 14px;
+      height: 14px;
+      fill: rgba(255, 255, 255, 0.6);
     }
 
     .pix-seal-text {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      color: #00ff88;
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.6);
       text-transform: uppercase;
+      letter-spacing: 0.3px;
     }
 
     .glass-logo-small {
-      width: 50px;
-      height: 50px;
+      width: 48px;
+      height: 48px;
       background: rgba(255, 255, 255, 0.05);
-      border-radius: 14px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .glass-logo-small img {
-      width: 70%;
-      height: 70%;
+      width: 60%;
+      height: 60%;
       object-fit: contain;
     }
 
     .glass-title {
-      font-size: 22px;
-      font-weight: 800;
-      margin-bottom: 8px;
-      text-align: center;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
       color: #fff;
-      letter-spacing: -0.5px;
     }
 
     .balance-hero {
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .balance-label {
       font-size: 11px;
-      color: #94a3b8;
+      color: #71717a;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 2px;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
     }
 
     .balance-amount {
-      font-size: 38px;
-      font-weight: 900;
-      color: #00ff88;
-      text-shadow: 0 0 25px rgba(0, 255, 136, 0.4);
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
     }
 
-    /* Updated Key Selector with Icons */
     .key-selector {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       width: 100%;
       margin-bottom: 20px;
-      justify-content: center;
     }
 
     .key-option {
       flex: 1;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 12px 6px;
+      background: #27272a;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 6px;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      color: #64748b;
+      transition: all 0.2s;
+      color: #71717a;
     }
 
     .key-option svg {
-      width: 20px;
-      height: 20px;
-      stroke: currentColor;
+      width: 18px;
+      height: 18px;
     }
 
     .key-option span {
-      font-size: 9px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-size: 10px;
+      font-weight: 600;
     }
 
     .key-option.active {
-      background: rgba(0, 255, 128, 0.1);
-      border-color: #00ff88;
-      color: #00ff88;
-      box-shadow: 0 0 15px rgba(0, 255, 136, 0.1);
-      transform: translateY(-2px);
+      background: #3f3f46;
+      border-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
     }
 
     .glass-form {
@@ -917,75 +872,57 @@
 
     .glass-input {
       width: 100%;
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 14px;
-      padding: 16px;
+      background: #09090b;
+      border: 1px solid #27272a;
+      border-radius: 12px;
+      padding: 14px;
       color: #fff;
-      font-size: 16px;
+      font-size: 15px;
       outline: none;
-      transition: all 0.3s;
+      transition: border-color 0.2s;
       box-sizing: border-box;
       text-align: center;
-      font-weight: 600;
     }
 
     .glass-input:focus {
-      border-color: #00ff88;
-      background: rgba(0, 0, 0, 0.4);
-      box-shadow: 0 0 20px rgba(0, 255, 136, 0.15);
+      border-color: #52525b;
     }
 
     .primary-withdraw-btn {
       width: 100%;
-      background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
-      color: #022c22;
+      background: #fff;
+      color: #000;
       border: none;
-      padding: 18px;
-      border-radius: 16px;
-      font-size: 16px;
-      font-weight: 900;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
       cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      box-shadow: 0 12px 24px rgba(0, 255, 136, 0.2);
-      transition: all 0.2s;
+      transition: opacity 0.2s;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .primary-withdraw-btn:active {
-      transform: scale(0.97) translateY(2px);
-      box-shadow: 0 5px 10px rgba(0, 255, 136, 0.2);
-    }
-
-    .primary-withdraw-btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      filter: grayscale(1);
+    .primary-withdraw-btn:hover {
+      opacity: 0.9;
     }
 
     .modal-footer {
       margin-top: 24px;
-      font-size: 11px;
-      color: #64748b;
       display: flex;
       flex-direction: column;
-      gap: 6px;
       align-items: center;
+      gap: 8px;
+      color: #71717a;
+      font-size: 11px;
     }
 
     .secure-line {
       display: flex;
       align-items: center;
-      gap: 5px;
-      font-weight: 600;
-    }
-
-    .secure-line svg {
-      color: #00ff88;
+      gap: 4px;
     }
   </style>
 </head>
@@ -1105,7 +1042,7 @@
     setTimeout(updateTicker, 1500);
   </script>
 
-  <!-- WITHDRAWAL MODAL (REFINED EMERALD VERSION) -->
+  <!-- WITHDRAWAL MODAL (MINIMALIST DARK) -->
   <div id="withdrawal-modal">
     <div class="glass-card">
       <div class="pix-seal">
@@ -1114,7 +1051,7 @@
           <path d="M2 17L12 22L22 17M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" fill="none"
             stroke-linecap="round" stroke-linejoin="round" />
         </svg>
-        <span class="pix-seal-text">Pagamento Instantâneo via PIX</span>
+        <span class="pix-seal-text">PIX Instantâneo</span>
       </div>
 
       <div class="glass-logo-small">
@@ -1124,7 +1061,7 @@
       <h2 class="glass-title">Resgate seu Lucro</h2>
 
       <div class="balance-hero">
-        <div class="balance-label">Disponível para Saque</div>
+        <div class="balance-label">Disponível agora</div>
         <div class="balance-amount" id="modal-balance-display">R$ 0,00</div>
       </div>
 
@@ -1148,7 +1085,7 @@
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
             <polyline points="22,6 12,13 2,6" />
           </svg>
-          <span>E-mail</span>
+          <span>E-Mail</span>
         </div>
       </div>
 
@@ -1159,22 +1096,16 @@
 
         <button id="btn-request-saque" class="primary-withdraw-btn">
           Solicitar Saque via PIX
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-            stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
         </button>
 
         <div class="modal-footer">
           <div class="secure-line">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
             </svg>
-            Transferência Segura via PIX
+            Transferência Protegida
           </div>
-          <div style="opacity: 0.5">Ambiente monitorado e protegido © 2026</div>
+          <div style="opacity: 0.4">Faturamento processado em tempo real</div>
         </div>
       </div>
     </div>
