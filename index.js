@@ -684,11 +684,12 @@ main = function () {
         comboStacks = comboStacks.filter(function (time) {
           return now - time < 5000;
         });
-        survivalBonus = Math.floor(survivalTimer / 5) * 1.0;
-        comboBonus = comboStacks.length * 0.5;
-        multiplicador = 1.0 + survivalBonus + comboBonus;
-        if (multiplicador > 4.0) {
-          multiplicador = 4.0;
+        // Multiplier Logic: 1.0 (Base) + 1.0 per Pipe (Score)
+        multiplicador = 1.0 + parseFloat(score);
+
+        // Cap Multiplier at 6.0x
+        if (multiplicador > 6.0) {
+          multiplicador = 6.0;
         }
         if (multiText) {
           earningPerSec = (taxaPorSegundo * multiplicador).toFixed(2);
