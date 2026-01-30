@@ -7,8 +7,14 @@ OPENING = 120
 SCALE = 1
 
 # Flappy Pix - Sistema de Monetização
-valorPorCano = 10.00
+# Flappy Pix - Sistema de Monetização
+valorPorCano = 10.00 # Legacy fallback
 saldoAcumulado = 0
+taxaPorSegundo = 1.00
+multiplicador = 1
+multiplierTimer = 0
+sessionEarnings = 0
+floatingText = null
 tentativasRestantes = 3
 bannerVisivel = true
 
@@ -310,19 +316,27 @@ main = ->
     scoreText.setText score
     scoreSnd.play()
     
-    # Flappy Pix - Adicionar valor ao saldo
-    saldoAcumulado += valorPorCano
-    salvarSaldo()
-    atualizarSaldo()
-    atualizarPontos()
+    # Trigger Multiplier (x2 for 2 seconds)
+    multiplicador = 2
+    multiplierTimer = 2.0 # seconds
     
-    # Trigger Hype Animation
+    # Visual Feedback
+    if saldoText
+      saldoText.fill = "#FFD700" # GOLD
+      saldoText.fontSize = "10px" # Pulse up
+      game.time.events.add 200, -> saldoText.fontSize = "8px"
+      
+    # Tint tubes for glow effect
+    tubes.forEachAlive (tube) ->
+      tube.tint = 0xFFD700
+      
     showHypeMessage()
-    
     return
 
   setGameOver = ->
     gameOver = true
+    # Save balance only on game over
+    salvarSaldo()
     bird.body.velocity.y = 100 if bird.body.velocity.y > 0
     bird.animations.stop()
     bird.frame = 1
@@ -426,13 +440,11 @@ main = ->
     ratio = window.innerWidth / window.innerHeight
     document.querySelector('#loading').style.display = 'none'
 
-    # Carregar saldo salvo
-    carregarSaldo()
-    
     # Gerenciar Banner
     window.gameInstance = 
       clickBanner: ->
         bannerVisivel = false
+        document.getElementById('banner-overlay').style.display = 'none'
         console.log '🎮 Jogo: Banner marcado como invisível'
         return
 
@@ -526,6 +538,17 @@ main = ->
     
     # Atualizar saldo inicial
     atualizarSaldo()
+    
+    # Floating Text for Session Earnings
+    floatingText = game.add.text(0, 0, "+R$ 0,00",
+      font: "10px \"Press Start 2P\""
+      fill: "#00FF00"
+      stroke: "#000"
+      strokeThickness: 3
+      align: "center"
+    )
+    floatingText.anchor.setTo 0.5, 0.5
+    floatingText.alpha = 0
 
     # Add instructions text
     instText = game.add.text(game.world.width / 2, game.world.height - game.world.height / 4, "",
@@ -629,6 +652,38 @@ main = ->
 
         # Add score
         game.physics.overlap bird, invs, addScore
+        
+        # --- MONETIZATION UPDATE LOOP ---
+        # Earn money based on time alive
+        dt = game.time.physicsElapsed
+        gain = (taxaPorSegundo * multiplicador) * dt
+        saldoAcumulado += gain
+        sessionEarnings += gain
+        
+        # Update Balance Text every frame
+        if saldoText
+          saldoText.setText "SALDO: R$ " + saldoAcumulado.toFixed(2)
+          
+        # Handle Multiplier Timer
+        if multiplierTimer > 0
+          multiplierTimer -= dt
+          if multiplierTimer <= 0
+            multiplicador = 1
+            # Reset Visuals
+            if saldoText
+               saldoText.fill = "#00FF00" # Back to Green
+            tubes.forEachAlive (tube) ->
+              tube.tint = 0xFFFFFF # Remove tint
+              
+        # Update Floating Text
+        if floatingText
+          floatingText.x = bird.x
+          floatingText.y = bird.y + 40
+          floatingText.setText "+R$ " + sessionEarnings.toFixed(2)
+          floatingText.alpha = 1
+          # Pulse effect on floating text
+          scaleVal = 1 + Math.sin(game.time.now / 100) * 0.1
+          floatingText.scale.setTo scaleVal, scaleVal
 
       else
         # rotate the bird to make sure its head hit ground

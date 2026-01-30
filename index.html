@@ -50,19 +50,16 @@
     }
 
     .banner-content {
-      background: #fff;
-      border-radius: 24px;
-      /* Rounded corners */
-      padding: 30px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 24px;
       max-width: 90%;
-      width: 340px;
+      width: 320px;
       text-align: center;
       font-family: 'Roboto', sans-serif;
-      /* Professional font */
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-      /* Soft shadow */
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
       position: relative;
-      animation: modalPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: modalPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .banner-content h1 {
@@ -89,12 +86,17 @@
 
     .banner-content .limit-badge {
       display: inline-block;
-      background: #e67e22;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 4px;
-      font-weight: bold;
-      margin-bottom: 20px;
+      background: #fff7ed;
+      /* Light orange pill */
+      color: #c2410c;
+      /* Deep orange text */
+      padding: 6px 16px;
+      border-radius: 100px;
+      /* Full pill shape */
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 24px;
+      border: 1px solid #ffedd5;
     }
 
     .banner-btn {
@@ -583,12 +585,11 @@
 <body>
   <div id="banner-overlay">
     <div class="banner-content">
-      <h1>💸 Jogue e Ganhe!</h1>
-      <p>No <strong>Flappy Pix</strong>, cada cano que você ultrapassa vale <span class="highlight">R$ 10,00</span>
-        diretamente no seu saldo!</p>
-      <div class="limit-badge">⚠️ APENAS 3 TENTATIVAS restantes</div>
+      <h1>SUA CONTA ESTÁ ATIVA!</h1>
+      <p>GANHE <span class="highlight">R$ 1,00</span> POR CADA SEGUNDO DE VOO</p>
+      <div class="limit-badge">APENAS 3 TENTATIVAS RESTANTES</div>
       <p>Você tem talento para faturar alto hoje?</p>
-      <button class="banner-btn" id="start-game-btn" onclick="fecharBanner()">COMEÇAR AGORA!</button>
+      <button class="banner-btn" onclick="window.gameInstance.clickBanner()">COMEÇAR AGORA!</button>
     </div>
   </div>
   <script>
