@@ -34,77 +34,11 @@
 <div id="loading">Carregando Flappy Pix...</div>
 <div id="screen"></div>
 <div id="github"></div>
-<script src="index.min.js?v=flappypix2028"></script>
+<script src="index.min.js?v=flappypix2029"></script>
 <script>
-// Flappy Pix - Sistema de Saque (Mobile-First)
-var saqueButton = null;
-
-// Função para mostrar botão de saque mobile-friendly
-function mostrarBotaoSaque() {
-    if (!saqueButton) {
-        saqueButton = document.createElement('button');
-        saqueButton.innerHTML = '💰 SOLICITAR SAQUE PIX';
-        saqueButton.style.cssText = `
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(45deg, #FF6B35, #F7931E, #FFD700);
-            color: white;
-            border: 3px solid #FFD700;
-            padding: 15px 25px;
-            font-family: "Press Start 2P", monospace;
-            font-size: 10px;
-            cursor: pointer;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-            z-index: 1000;
-            transition: all 0.3s ease;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-            max-width: 250px;
-        `;
-        
-        saqueButton.onclick = function() {
-            var saldoAtual = parseFloat(localStorage.getItem('saldoFlappyPix')) || 0;
-            var pontosAtuais = window.score || 0;
-            
-            alert(`🎉 SOLICITAÇÃO DE SAQUE ENVIADA!\n\n💰 Valor: R$ ${saldoAtual.toFixed(2)}\n🏆 Pontos: ${pontosAtuais}\n\n📱 PIX da Tech House ForFy em até 24h!\n\n🚀 Continue jogando!`);
-            console.log('🎮 FLAPPY PIX - SAQUE:', {
-                valor: saldoAtual.toFixed(2),
-                pontos: pontosAtuais,
-                timestamp: new Date().toISOString()
-            });
-        };
-        
-        document.body.appendChild(saqueButton);
-    }
-    saqueButton.style.display = 'block';
-}
-
-// Função para esconder botão de saque
-function esconderBotaoSaque() {
-    if (saqueButton) {
-        saqueButton.style.display = 'none';
-    }
-}
-
-// Monitorar game over
-function monitorarGameOver() {
-    if (typeof window.gameOver !== 'undefined') {
-        if (window.gameOver && (!saqueButton || saqueButton.style.display === 'none')) {
-            setTimeout(mostrarBotaoSaque, 1000);
-        } else if (!window.gameOver && saqueButton && saqueButton.style.display === 'block') {
-            esconderBotaoSaque();
-        }
-    }
-}
-
-// Inicializar monitoramento
-setTimeout(function() {
-    setInterval(monitorarGameOver, 200);
-    console.log('🎮 FLAPPY PIX - Sistema mobile ativo!');
-}, 2000);
-
+// Flappy Pix - Sistema Mobile-First (sem botão de saque)
+console.log('🎮 FLAPPY PIX - Sistema mobile ativo!');
+console.log('💰 Saldo salvo no localStorage');
 </script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
