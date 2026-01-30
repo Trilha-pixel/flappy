@@ -9,6 +9,8 @@ SCALE = 1
 # Flappy Pix - Sistema de Monetização
 valorPorCano = 0.50
 saldoAcumulado = 0
+tentativasRestantes = 3
+bannerVisivel = true
 
 HEIGHT = 384
 WIDTH = 288
@@ -139,7 +141,12 @@ main = ->
     bird.body.velocity.y = 100 if bird.body.velocity.y > 0
     bird.animations.stop()
     bird.frame = 1
-    instText.setText "TOQUE\nPARA TENTAR NOVAMENTE"
+    
+    tentativasRestantes -= 1
+    if tentativasRestantes < 0 then tentativasRestantes = 0
+    
+    msgTentativa = if tentativasRestantes > 0 then "TOQUE\nPARA TENTAR NOVAMENTE\n(" + tentativasRestantes + " restam)" else "LIMITE ATINGIDO!\nVOLTE MAIS TARDE"
+    instText.setText msgTentativa
     instText.renderable = true
     hiscore = window.localStorage.getItem("hiscore")
     hiscore = (if hiscore then hiscore else score)
@@ -164,8 +171,11 @@ main = ->
     # Make bird reset the game
     game.time.events.add 1000, ->
       game.input.onTap.addOnce ->
-        reset()
-        swooshSnd.play()
+        if tentativasRestantes > 0
+          reset()
+          swooshSnd.play()
+        else
+          alert "Você atingiu o limite de 3 tentativas! Ganhe mais amanhã!"
 
     hurtSnd.play()
     return
@@ -221,6 +231,12 @@ main = ->
 
     # Carregar saldo salvo
     carregarSaldo()
+    
+    # Gerenciar Banner
+    document.querySelector('#start-game-btn').addEventListener 'click', ->
+      document.querySelector('#banner-overlay').style.display = 'none'
+      bannerVisivel = false
+      return
 
     # Set world dimensions
     Phaser.Canvas.setSmoothingEnabled(game.context, false)
@@ -337,7 +353,10 @@ main = ->
     swooshSnd = game.add.audio("swoosh")
 
     # Add controls
-    game.input.onDown.add flap
+    game.input.onDown.add ->
+      if !bannerVisivel
+        flap()
+      return
 
     # RESET!
     reset()
