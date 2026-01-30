@@ -131,16 +131,20 @@ scheduleSocialProof = function() {
   names = ["Carlos H.", "Ana P.", "Eduardo M.", "Fernanda S.", "João V.", "Beatriz L.", "Lucas R.", "Mariana C.", "Gabriel O.", "Juliana K.", "Rafael T.", "Larissa B.", "Pedro G.", "Camila D.", "Gustavo N.", "Letícia F.", "Daniel S.", "Amanda W.", "Felipe J.", "Carolina M.", "Bruno A.", "Vanessa R.", "Thiago L.", "Bianca P.", "Rodrigo H.", "Jessica T.", "Leonardo C.", "Melissa G.", "Vinicius D.", "Gabriela S."];
   colors = ["#FFB7B2", "#B5EAD7", "#E2F0CB", "#FFDAC1", "#C7CEEA", "#F0E68C", "#D8BFD8", "#FF6961"];
   runSequence = function() {
-    var avatarHtml, color, initial, name, nextDelay;
+    var avatarHtml, color, initial, joinPhrases, joinText, name, nextDelay, withdrawPhrases, withdrawText;
     name = names[Math.floor(Math.random() * names.length)];
     initial = name.charAt(0);
     color = colors[Math.floor(Math.random() * colors.length)];
     avatarHtml = "<div class='social-avatar' style='background-color: " + color + "; color: #333'>" + initial + "</div>";
-    showNotification(avatarHtml, "<strong>" + name + "</strong> entrou para o plano <span class='pro-badge'>PRO</span>");
+    joinPhrases = ["entrou para o plano <span class='pro-badge'>PRO</span>", "agora faz parte do clube <span class='pro-badge'>PRO</span>", "acabou de assinar o <span class='pro-badge'>PRO</span>", "garantiu sua vaga no <span class='pro-badge'>PRO</span>", "começou a lucrar no <span class='pro-badge'>PRO</span>"];
+    joinText = joinPhrases[Math.floor(Math.random() * joinPhrases.length)];
+    withdrawPhrases = ["acabou de sacar", "recebeu um PIX de", "faturou agora", "retirou para a conta", "lucrou hoje"];
+    withdrawText = withdrawPhrases[Math.floor(Math.random() * withdrawPhrases.length)];
+    showNotification(avatarHtml, "<strong>" + name + "</strong> " + joinText);
     setTimeout(function() {
       var amount;
       amount = Math.floor(Math.random() * 400) + 150;
-      return showNotification(avatarHtml, "<strong>" + name + "</strong> acabou de sacar <strong>R$ " + amount + ",00</strong>! UAU");
+      return showNotification(avatarHtml, "<strong>" + name + "</strong> " + withdrawText + " <strong>R$ " + amount + ",00</strong>! UAU");
     }, 2000);
     nextDelay = Math.random() * 8000 + 5000;
     setTimeout(runSequence, nextDelay);

@@ -138,13 +138,33 @@ scheduleSocialProof = ->
     
     avatarHtml = "<div class='social-avatar' style='background-color: #{color}; color: #333'>#{initial}</div>"
     
+    # Varied phrases for Join PRO
+    joinPhrases = [
+      "entrou para o plano <span class='pro-badge'>PRO</span>"
+      "agora faz parte do clube <span class='pro-badge'>PRO</span>"
+      "acabou de assinar o <span class='pro-badge'>PRO</span>"
+      "garantiu sua vaga no <span class='pro-badge'>PRO</span>"
+      "começou a lucrar no <span class='pro-badge'>PRO</span>"
+    ]
+    joinText = joinPhrases[Math.floor(Math.random() * joinPhrases.length)]
+
+    # Varied phrases for Withdraw
+    withdrawPhrases = [
+      "acabou de sacar"
+      "recebeu um PIX de"
+      "faturou agora"
+      "retirou para a conta"
+      "lucrou hoje"
+    ]
+    withdrawText = withdrawPhrases[Math.floor(Math.random() * withdrawPhrases.length)]
+
     # Step 1: Join PRO
-    showNotification avatarHtml, "<strong>#{name}</strong> entrou para o plano <span class='pro-badge'>PRO</span>"
+    showNotification avatarHtml, "<strong>#{name}</strong> #{joinText}"
     
     # Step 2: Withdraw (after 2s)
     setTimeout ->
       amount = (Math.floor(Math.random() * 400) + 150) 
-      showNotification avatarHtml, "<strong>#{name}</strong> acabou de sacar <strong>R$ #{amount},00</strong>! UAU"
+      showNotification avatarHtml, "<strong>#{name}</strong> #{withdrawText} <strong>R$ #{amount},00</strong>! UAU"
     , 2000
     
     # Schedule next sequence
