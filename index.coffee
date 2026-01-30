@@ -242,7 +242,7 @@ generateLeaderboard = ->
   return
 
 generateLeaderboard()
-scheduleSocialProof()
+# scheduleSocialProof()
 
 atualizarPontos = ->
   if pontosText

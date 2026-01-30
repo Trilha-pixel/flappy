@@ -212,8 +212,6 @@ generateLeaderboard = function() {
 
 generateLeaderboard();
 
-scheduleSocialProof();
-
 atualizarPontos = function() {
   if (pontosText) {
     return pontosText.setText("PONTOS: " + score);
