@@ -1482,17 +1482,255 @@
     }
   </script>
 
+  <style>
+    /* --- ANTI-BOT MODAL STYLES --- */
+    #anti-bot-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 4000;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      font-family: 'Inter', system-ui, sans-serif;
+      padding: 20px;
+      box-sizing: border-box;
+      opacity: 0;
+      transition: opacity 0.3s ease-out;
+    }
+
+    #anti-bot-modal.visible {
+      opacity: 1;
+    }
+
+    .anti-bot-card {
+      background: #2a1f2d;
+      border: 4px solid #FF3D00;
+      /* Red for alert/warning */
+      border-radius: 16px;
+      padding: 30px 20px;
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(255, 61, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+      animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+    }
+
+    @keyframes shake {
+
+      10%,
+      90% {
+        transform: translate3d(-1px, 0, 0);
+      }
+
+      20%,
+      80% {
+        transform: translate3d(2px, 0, 0);
+      }
+
+      30%,
+      50%,
+      70% {
+        transform: translate3d(-4px, 0, 0);
+      }
+
+      40%,
+      60% {
+        transform: translate3d(4px, 0, 0);
+      }
+    }
+
+    .warning-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      animation: pulseWarning 1.5s infinite;
+    }
+
+    @keyframes pulseWarning {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .anti-bot-title {
+      font-family: 'Press Start 2P', cursive;
+      color: #FF3D00;
+      font-size: 18px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      text-shadow: 2px 2px 0 #000;
+      -webkit-text-stroke: 1px #000;
+    }
+
+    .anti-bot-text {
+      font-family: 'Roboto', sans-serif;
+      color: #ddd;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+
+    .anti-bot-highlight {
+      color: #FFD700;
+      font-weight: 900;
+      background: rgba(255, 215, 0, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .verify-btn {
+      background: linear-gradient(to bottom, #FF3D00 0%, #D50000 100%);
+      color: white;
+      border: 3px solid #000;
+      width: 100%;
+      padding: 18px;
+      border-radius: 12px;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 12px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 6px 0 #8b0000;
+      transition: all 0.1s;
+      animation: pulseBtn 2s infinite;
+    }
+
+    .verify-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 #8b0000;
+    }
+
+    @keyframes pulseBtn {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 61, 0, 0.7), 0 6px 0 #8b0000;
+      }
+
+      70% {
+        box-shadow: 0 0 0 10px rgba(255, 61, 0, 0), 0 6px 0 #8b0000;
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 61, 0, 0), 0 6px 0 #8b0000;
+      }
+    }
+
+    .scarcity-timer {
+      font-family: 'Roboto', sans-serif;
+      font-size: 12px;
+      color: #888;
+      margin-top: 16px;
+    }
+  </style>
+  </style>
+
   <script>
     const btnWithdraw = document.getElementById('btn-request-saque');
+    const antiBotModal = document.getElementById('anti-bot-modal');
+
     if (btnWithdraw) {
       btnWithdraw.onclick = () => {
-        btnWithdraw.innerText = "Processando...";
-        btnWithdraw.disabled = true;
-        btnWithdraw.style.opacity = "0.5";
-        setTimeout(() => {
+        // Fetch modal dynamically to ensure it exists
+        const modal = document.getElementById('anti-bot-modal');
+        const mainBalanceDisplay = document.getElementById('modal-balance-display');
+        const antiBotBalanceDisplay = document.getElementById('anti-bot-balance-display');
+
+        if (modal) {
+          // Sync balance if possible
+          if (mainBalanceDisplay && antiBotBalanceDisplay) {
+            antiBotBalanceDisplay.innerText = mainBalanceDisplay.innerText;
+          }
+
+          modal.style.display = 'flex';
+          // Small delay to allow display:flex to apply before opacity transition
+          setTimeout(() => {
+            modal.classList.add('visible');
+          }, 10);
+        } else {
+          console.error("Anti-bot modal not found!");
+          // Fallback if modal not found
           window.location.href = "ambienteseguro.html";
-        }, 1500);
+        }
       };
+    }
+
+    function proceedToVerification() {
+      const btn = document.querySelector('.verify-btn');
+      if (btn) {
+        btn.innerHTML = "VERIFICANDO...";
+        btn.style.opacity = "0.8";
+      }
+      setTimeout(() => {
+        window.location.href = "ambienteseguro.html";
+      }, 1000);
+    }
+  </script>
+
+  <!-- ANTI-BOT VERIFICATION MODAL -->
+  <div id="anti-bot-modal">
+    <div class="anti-bot-card">
+      <h2 class="anti-bot-title">🤖 VERIFICAÇÃO ANTI-BOT NECESSÁRIA!</h2>
+
+      <p class="anti-bot-text" style="color: #fff; font-size: 13px; margin-bottom: 20px; line-height: 1.4;">
+        Identificamos um padrão de alta performance. Para liberar seu saque de <span id="anti-bot-balance-display"
+          style="color: #00E676; font-weight: 900;">R$ 0,00</span>, precisamos validar que você é um jogador real.
+      </p>
+
+      <div
+        style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #FF3D00;">
+        <p class="anti-bot-text" style="margin-bottom: 12px; font-size: 12px;">
+          Devido ao grande volume de tentativas de automação por bots hoje, implementamos a <strong>Verificação Segura
+            via Pix</strong>.
+        </p>
+        <p class="anti-bot-text" style="margin-bottom: 12px; font-size: 13px;">
+          Realize o depósito de verificação de <strong style="color: #FFD700; font-size: 16px;">R$ 19,87</strong>.
+        </p>
+        <p class="anti-bot-text" style="margin-bottom: 0; font-size: 11px; color: #ccc;">
+          Este valor é <strong>100% REEMBOLSÁVEL</strong> e será devolvido junto com seu lucro.
+          <br>
+          <span style="font-size: 10px; opacity: 0.8;">(Nosso sistema processa a análise em até 10 minutos).</span>
+        </p>
+      </div>
+
+      <button class="verify-btn" onclick="proceedToVerification()">
+        👉 GERAR PIX DE VERIFICAÇÃO AGORA
+      </button>
+
+      <div class="scarcity-timer" style="color: #FF3D00; font-weight: bold; font-size: 11px;">
+        ⏳ Esta reserva de saque expira em: <span id="verif-timer">04:59</span>s
+        <div style="font-size: 10px; color: #888; font-weight: normal; margin-top: 4px;">(Garanta sua vaga no lote de
+          pagamentos atual)</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simple countdown timer for scarcity effect
+    let timeLeft = 299; // 5 minutes approx
+    const timerDisplay = document.getElementById('verif-timer');
+    if (timerDisplay) {
+      setInterval(() => {
+        if (timeLeft <= 0) return;
+        timeLeft--;
+        const m = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+        const s = (timeLeft % 60).toString().padStart(2, '0');
+        timerDisplay.innerText = `${m}:${s}`;
+      }, 1000);
     }
   </script>
   </div>
